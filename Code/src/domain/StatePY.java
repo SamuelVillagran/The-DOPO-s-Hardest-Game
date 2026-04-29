@@ -1,6 +1,6 @@
 package domain;
 
-public interface StatePY {
+public interface StatePY extends StateEntity {
 
 	void setAttributesPlayer();
 	void setPlayer(Player py);

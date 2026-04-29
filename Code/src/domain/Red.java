@@ -14,10 +14,5 @@ public class Red implements StatePY {
 	@Override
 	public void setPlayer(Player py) {
 		this.py = py;
-	}
-
-	
-	
-
-	
+	}	
 }
