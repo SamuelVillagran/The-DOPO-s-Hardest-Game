@@ -11,8 +11,6 @@
 
 # 🟥 The DOPO Hardest Game
 
-### *¿Crees que puedes con él?*
-
 ![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
 ![OOP](https://img.shields.io/badge/OOP-Design-blue?style=for-the-badge)
 ![Status](https://img.shields.io/badge/Status-En%20Desarrollo-yellow?style=for-the-badge)
