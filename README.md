@@ -138,7 +138,7 @@ Log de errores integrado
 🛠️ Tecnologías
 TecnologíaUsoJavaLenguaje principalOOP / POOBParadigma de diseñoSwing / JavaFXInterfaz gráficaSerialización JavaGuardado de partidas
 
-👥 Autores
+👥 Quienes propusieron los requisitos son:
 <table>
   <tr>
     <td align="center">👨‍💻 <b>Santiago Garcia</b></td>
