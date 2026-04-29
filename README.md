@@ -155,32 +155,21 @@ El juego maneja **mínimo 3 niveles**. Cada nivel puede configurarse con:
 ---
 
 ## 🖼️ Anexo Visual
-
-```
-  JUGADORES          ENEMIGOS            MONEDAS
-
- ┌─────────┐
- │ ██████  │
- │ ██████  │       ╭─────────╮         ╭─────────╮
- │ ██████  │      ╱  ╭─────╮  ╲       ╱  ╭─────╮  ╲
- └─────────┘     │   │  ●  │   │     │   │  ●  │   │
-   (Rojo)         ╲  ╰─────╯  ╱       ╲  ╰─────╯  ╱
-                   ╰─────────╯         ╰─────────╯
- ┌─────────┐      (negro / azul)      (negro / amarillo)
- │ ██████  │
- │ ██████  │
- │ ██████  │
- └─────────┘
-   (Azul)
-
- ┌─────────┐
- │ ██████  │
- │ ██████  │
- │ ██████  │
- └─────────┘
-   (Verde)
-```
-
+ 
+| Jugadores | Enemigos | Monedas |
+|:---------:|:--------:|:-------:|
+| 🟥 Rojo | 🔵 Punto Azul | 🟡 Moneda |
+| 🟦 Azul | | |
+| 🟩 Verde | | |
+ 
+| Entidad | Color exterior | Color interior | Forma |
+|---------|---------------|----------------|-------|
+| Jugador Rojo | — | 🔴 Rojo | Cuadrado |
+| Jugador Azul | — | 🔵 Azul | Cuadrado (más pequeño) |
+| Jugador Verde | — | 🟢 Verde | Cuadrado |
+| Enemigo | ⚫ Negro | 🔵 Azul | Círculo |
+| Moneda | ⚫ Negro | 🟡 Amarillo | Círculo |
+ 
 ---
 
 ## 🛠️ Tecnologías
