@@ -12,6 +12,7 @@ public class Map {
 	public Map() {
 		elements = new HashMap<>();
 		elements.put(elements.size(), new Player());
+		elements.put(elements.size(), new Obstacle());
 	}
 	
 	public HashMap<String, String> loadElementImage() {

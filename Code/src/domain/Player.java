@@ -95,7 +95,7 @@ public class Player extends Entity {
 		posX = x;
 		posY = y;
 		this.speed = speed;
-		this.color = color;
+		
 	}
 	
 	public void setState(StatePY statePY) {
@@ -105,7 +105,7 @@ public class Player extends Entity {
 	}
 	
 	public String getNameClass() {
-		return getClass().getSimpleName().toLowerCase();
+		return this.getClass().getSimpleName().toLowerCase();
 	}
 	
 	public String getNameState() {
