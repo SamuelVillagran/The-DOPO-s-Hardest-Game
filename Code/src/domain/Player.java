@@ -102,13 +102,32 @@ public class Player extends Entity {
 	public void setState(StatePY statePY) {
 		this.statePY = statePY;
 		statePY.setPlayer(this);
+		statePY.setAttributesPlayer();
 	}
 	
 	public String getNameClass() {
-		return getClass().getSimpleName();
+		return getClass().getSimpleName().toLowerCase();
 	}
 	
 	public String getNameState() {
-		return statePY.getClass().getSimpleName();
+		return statePY.getClass().getSimpleName().toLowerCase();
+	}
+	
+	public String getPathImage() {
+		return "/"+getNameClass()+"/"+getNameState()+".png";		
+	}
+
+	public void move(char direction) {
+
+		switch (direction) {
+			case 'u': posY -= speed;
+				break;
+			case 'd': posY += speed;
+				break;
+			case 'l': posX -= speed;
+				break;
+			case 'r': posX += speed;
+				break;
+		}
 	}
 }

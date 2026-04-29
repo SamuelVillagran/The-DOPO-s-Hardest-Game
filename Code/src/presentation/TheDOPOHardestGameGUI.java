@@ -2,11 +2,14 @@ package presentation;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import domain.Element;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.util.HashMap;
 
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import domain.DimensionGame;
@@ -20,7 +23,6 @@ public class TheDOPOHardestGameGUI extends JPanel implements Runnable {
 	private KeyHandler keyH;
 	private Thread gameThread;
 	private TheDOPOHardestGame game;
-	private Player py;
 	
 	public static final int FPS = 60;
 	
@@ -29,7 +31,6 @@ public class TheDOPOHardestGameGUI extends JPanel implements Runnable {
 	 */
 	public TheDOPOHardestGameGUI() {
 		game = new TheDOPOHardestGame();
-		py = new Player();
 		prepareElements();
 		prepareActions();
 		
@@ -39,42 +40,7 @@ public class TheDOPOHardestGameGUI extends JPanel implements Runnable {
 	private void prepareActions() {
 		
 		keyH = new KeyHandler() {
-			@Override
-			public void keyPressed(KeyEvent e) {
-					
-				int code = e.getKeyCode();
-				
-				if (code == KeyEvent.VK_W) {
-					setUp(true);
-				}
-				if (code == KeyEvent.VK_S) {
-					setDown(true);
-				}
-				if (code == KeyEvent.VK_D) {
-					setRigth(true);
-				}
-				if (code == KeyEvent.VK_A) {
-					setLeft(true);
-				}
-			}
 			
-			@Override
-			public void keyReleased(KeyEvent e) {
-				int code = e.getKeyCode();
-				
-				if (code == KeyEvent.VK_W) {
-					setUp(false);
-				}
-				if (code == KeyEvent.VK_S) {
-					setDown(false);
-				}
-				if (code == KeyEvent.VK_A) {
-					setLeft(false);
-				}
-				if (code == KeyEvent.VK_D) {
-					setRigth(false);
-				}
-			}
 		};
 			
 			
@@ -122,17 +88,19 @@ public class TheDOPOHardestGameGUI extends JPanel implements Runnable {
 	}
 
 	private void update() {
+		Player py = game.getPlayer();
+		
 		if (keyH.getUp() == true) {
-			py.decrementSpeedPosY();
+			py.move('u');
 		}
 		if (keyH.getDown() == true) {
-			py.incrementSpeedPosY();
+			py.move('d');
 		}
 		if (keyH.getLeft() == true) {
-			py.decrementSpeedPosX();
+			py.move('l');
 		}
 		if (keyH.getRigth() == true) {
-			py.incrementSpeedPosX();		
+			py.move('r');	
 		}
 	}
 
@@ -142,6 +110,24 @@ public class TheDOPOHardestGameGUI extends JPanel implements Runnable {
 	}
 	
 	public void draw(Graphics2D g2) {
-		
+		HashMap<Integer, Element> elements = game.getElements();
+		HashMap<String, String> elementsPaths = game.getElementsToDraw();
+		BufferedImage img = null;
+		for (Element e: elements.values()) {
+			try {
+				img = ImageIO.read(getClass().getResourceAsStream(elementsPaths.get(e.getNameClass())));
+				g2.drawImage(img, e.getPosX(), e.getPosY(), null);
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+		}
+	}
+	
+	@Override
+	protected void paintComponent(Graphics g) {
+	    super.paintComponent(g);
+	    Graphics2D g2 = (Graphics2D) g;
+	    draw(g2);
+	    g2.dispose();
 	}
 }

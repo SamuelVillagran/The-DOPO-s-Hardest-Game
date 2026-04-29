@@ -1,6 +1,7 @@
 package presentation;
 
 import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class KeyHandler extends KeyAdapter {
 
@@ -10,10 +11,47 @@ public class KeyHandler extends KeyAdapter {
 	private boolean rigth;
 	
 	public KeyHandler() {
-		setUp(false);
-		setDown(false);
-		setLeft(false);
-		setRigth(false);
+		up = false;
+		down = false;
+		rigth = false;
+		left = false;
+	}
+	
+	@Override
+	public void keyPressed(KeyEvent e) {
+			
+		int code = e.getKeyCode();
+		
+		if (code == KeyEvent.VK_W) {
+			up = true;
+		}
+		if (code == KeyEvent.VK_S) {
+			down = true;
+		}
+		if (code == KeyEvent.VK_D) {
+			rigth = true;
+		}
+		if (code == KeyEvent.VK_A) {
+			left = true;
+		}
+	}
+	
+	@Override
+	public void keyReleased(KeyEvent e) {
+		int code = e.getKeyCode();
+		
+		if (code == KeyEvent.VK_W) {
+			setUp(false);
+		}
+		if (code == KeyEvent.VK_S) {
+			setDown(false);
+		}
+		if (code == KeyEvent.VK_A) {
+			setLeft(false);
+		}
+		if (code == KeyEvent.VK_D) {
+			setRigth(false);
+		}
 	}
 
 	public boolean isUp() {

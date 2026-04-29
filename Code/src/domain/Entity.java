@@ -1,9 +1,9 @@
 package domain;
 
-public class Entity extends Element {
+public abstract class Entity extends Element {
 
 	protected int speed;
 	
-	
+	public abstract void move(char direction);
 	
 }

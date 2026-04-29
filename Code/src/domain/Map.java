@@ -1,21 +1,41 @@
 package domain;
 
-import java.io.IOException;
+
+import java.util.HashMap;
 import java.util.HashSet;
 
 public class Map {
 
-	private HashSet<Element> elements;
+	private HashMap<Integer, Element> elements;
 	
-	public String loadElementImage() throws IOException {
+	
+	public Map() {
+		elements = new HashMap<>();
+		elements.put(elements.size(), new Player());
+	}
+	
+	public HashMap<String, String> loadElementImage() {
 		String pathImage = "";
+		HashMap<String, String> pathsElements;
 		
-		try {
-			
-		} catch (IOException e) {
-			
+		pathsElements = new HashMap();
+		
+		for (Element e : elements.values()) {
+			String nameClass = e.getNameClass();
+			if (!pathsElements.containsKey(nameClass)) {
+				pathsElements.put(nameClass, e.getPathImage());
+			}
 		}
+		return pathsElements;
 		
+	}
+
+	public HashMap<Integer, Element> getElements() {
+		return elements;
+	}
+
+	public Player getPlayer() {
+		return (Player) elements.get(0);
 	}
 	
 }
