@@ -1,3 +1,6 @@
 *.asta.lock
 *.class
 *.ctxt
+*.classpath
+*.project
+*.settings
