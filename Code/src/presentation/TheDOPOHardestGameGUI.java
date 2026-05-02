@@ -5,9 +5,12 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import domain.Element;
+import domain.Map;
+
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map.Entry;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
@@ -23,6 +26,7 @@ public class TheDOPOHardestGameGUI extends JPanel implements Runnable {
 	private KeyHandler keyH;
 	private Thread gameThread;
 	private TheDOPOHardestGame game;
+	private HashMap<String, BufferedImage> cachedImages;
 	
 	public static final int FPS = 60;
 	
@@ -31,11 +35,12 @@ public class TheDOPOHardestGameGUI extends JPanel implements Runnable {
 	 */
 	public TheDOPOHardestGameGUI() {
 		game = new TheDOPOHardestGame();
+		cachedImages = new HashMap<>();
 		prepareElements();
 		prepareActions();
-		
-
 	}
+	
+	
 
 	private void prepareActions() {
 		
@@ -49,8 +54,22 @@ public class TheDOPOHardestGameGUI extends JPanel implements Runnable {
 
 	private void prepareElements() {
 		setScreen();
-	}
+		loadImages(); // <-- cargar una sola vez
+    }
 
+    private void loadImages() {
+        HashMap<String, String> paths = game.getElementsToDraw();
+        for (Entry<String, String> entry : paths.entrySet()) {
+            try {
+                BufferedImage img = ImageIO.read(
+                    getClass().getResourceAsStream(entry.getValue()));
+                cachedImages.put(entry.getKey(), img);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    
 	private void setScreen() {
 		this.setPreferredSize(new Dimension(DimensionGame.SCREENWIDTH, DimensionGame.SCREENHEIGHT));
 		this.setBackground(Color.BLACK);
@@ -110,18 +129,29 @@ public class TheDOPOHardestGameGUI extends JPanel implements Runnable {
 	}
 	
 	public void draw(Graphics2D g2) {
-		HashMap<Integer, Element> elements = game.getElements();
-		HashMap<String, String> elementsPaths = game.getElementsToDraw();
-		BufferedImage img = null;
-		for (Element e: elements.values()) {
-			try {
-				img = ImageIO.read(getClass().getResourceAsStream(elementsPaths.get(e.getNameClass())));
-				g2.drawImage(img, e.getPosX(), e.getPosY(), null);
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}
-		}
-	}
+        HashMap<Integer, Element> elements = game.getElements();
+
+        // Tiles, obstáculos, monedas
+        for (Element e : elements.values()) {
+            if (e instanceof Player) continue;
+            BufferedImage img = cachedImages.get(e.getNameClass());
+            if (img != null) {
+                g2.drawImage(img, e.getPosX(), e.getPosY(),
+                    (int)(e.getSize() * DimensionGame.TILESIZEWIDTH),
+                    (int)(e.getSize() * DimensionGame.TILESIZEWIDTH), null);
+            }
+        }
+
+        // Player encima
+        Player py = game.getPlayer();
+        BufferedImage img = cachedImages.get(py.getNameClass());
+        if (img != null) {
+            g2.drawImage(img, py.getPosX(), py.getPosY(),
+                (int)(py.getSize() * DimensionGame.TILESIZEWIDTH),
+                (int)(py.getSize() * DimensionGame.TILESIZEWIDTH), null);
+        }
+    }
+
 	
 	@Override
 	protected void paintComponent(Graphics g) {
