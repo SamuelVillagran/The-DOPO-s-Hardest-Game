@@ -11,6 +11,5 @@ public class DimensionGame {
 	
 	public static final int SCREENWIDTH = TILESIZE*MAXWORLDCOL;
 	public static final int SCREENHEIGHT = TILESIZE*MAXWORLDROW;
-	
 
 }
