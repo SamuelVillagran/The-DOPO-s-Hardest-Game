@@ -3,8 +3,10 @@ package domain;
 public class Level1 extends Level {
 
 	
+	
 	public Level1() {
 		initialize();
+		map = new Map(1);
 	}
 
 	@Override

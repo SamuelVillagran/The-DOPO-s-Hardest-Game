@@ -1,28 +1,31 @@
 package domain;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 
 public class TheDOPOHardestGame {
 
-	private static Level currentlevel;
+	private static Level currentLevel;
 	private ArrayList<Player> players;
+	private static int numCurrentLevel;
 	
-	public TheDOPOHardestGame() {
+	public TheDOPOHardestGame(int numCurrentLevel) { // String filePathMap como parametro
 		players = new ArrayList<>();
 		players.add(new Player());
-		currentlevel = new Level1();
+		this.currentLevel = new Level1();
+		this.numCurrentLevel = numCurrentLevel;
 	}
 	
-	public String getPathLevel(int level, String modePlay) {
-		return "/level/level"+1;
-	}
+	
 	
 	public HashMap<String, String> getElementsToDraw() throws IOException{
 		HashMap<String, String> elementsPath = new HashMap();
-		elementsPath = currentlevel.getElementsToDraw();
+		elementsPath = this.currentLevel.getElementsToDraw();
 		Player py = getPlayer();
 		elementsPath.put(py.getNameClass(), py.getPathImage());
 		return elementsPath;
@@ -34,6 +37,32 @@ public class TheDOPOHardestGame {
 	}
 	
 	public HashMap<Integer, Element> getElements() {
-		return currentlevel.getElements();
+		return this.currentLevel.getElements();
 	}
+	
+	/**
+	 * Load the buffered text's map and convert it into an integer matrix. This matrix is named mapTileNum.
+	 * @param filePathMap
+	 */
+	public int[][] loadMap() {
+		return this.currentLevel.getMapTileNum();
+	}
+	
+	
+	/**
+	 * 
+	 * @return An Array of diferent types of tile 0: Floor, 1: Obstacle
+	 */
+	public Tile[] loadTiles() {
+		Tile[] tiles = new Tile[10];
+		tiles[0] = new Floor();
+		tiles[1] = new Obstacle();
+		return tiles;
+	}
+	
+	
+	public void setCurrentLevel(int numLevel) {
+		numCurrentLevel = numLevel;
+	}
+	
 }

@@ -5,6 +5,7 @@ import java.util.HashMap;
 public abstract class Level {
 
 	protected HashMap<Integer, Element> elements;
+	protected static Map map;
 	
 	/* 
 	 * elements = new HashMap<>();
@@ -40,6 +41,14 @@ public abstract class Level {
 		}
 		return pathsElements;
 		
+	}
+
+	public int[][] loadMap() {
+		return map.getMapTileNum();
+	}
+
+	public int[][] getMapTileNum() {
+		return map.getMapTileNum();
 	}
 	
 }

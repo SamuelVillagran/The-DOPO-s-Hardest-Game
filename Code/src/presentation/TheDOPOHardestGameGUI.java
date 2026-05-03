@@ -7,7 +7,10 @@ import java.awt.Graphics2D;
 import domain.Element;
 
 import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
@@ -17,6 +20,7 @@ import javax.swing.JPanel;
 import domain.DimensionGame;
 import domain.Player;
 import domain.TheDOPOHardestGame;
+import domain.Tile;
 
 public class TheDOPOHardestGameGUI extends JPanel implements Runnable {
 
@@ -34,7 +38,7 @@ public class TheDOPOHardestGameGUI extends JPanel implements Runnable {
 	 * @throws IOException 
 	 */
 	public TheDOPOHardestGameGUI() throws IOException {
-		game = new TheDOPOHardestGame();
+		game = new TheDOPOHardestGame(1);
 		cachedImages = new HashMap<>();
 		prepareElements();
 		prepareActions();
@@ -131,8 +135,11 @@ public class TheDOPOHardestGameGUI extends JPanel implements Runnable {
 	public void draw(Graphics2D g2) {
         HashMap<Integer, Element> elements = game.getElements();
 
+        
+        loadMap(g2);
+        
         // Tiles, obstáculos, monedas //Ayudado por claude sonnet 4.6 IA a poner el player encima
-        int count = 0;
+        
         Player py = game.getPlayer();
         for (Element e : elements.values()) {
             if (e.equals(py)) continue;
@@ -143,6 +150,8 @@ public class TheDOPOHardestGameGUI extends JPanel implements Runnable {
                     (int)(e.getSize() * DimensionGame.TILESIZEWIDTH), null);
             }
         }
+        
+        
 
         // Player encima
         
@@ -155,6 +164,33 @@ public class TheDOPOHardestGameGUI extends JPanel implements Runnable {
     }
 
 	
+	private void loadMap(Graphics2D g2) {
+		int col = 0, row = 0, x = 0, y =0;
+        int tileNum;
+        int[][] mapTileNum = new int[DimensionGame.MAXWORLDROW][DimensionGame.MAXWORLDCOL];
+        while (col < DimensionGame.MAXWORLDCOL && row <  DimensionGame.MAXWORLDROW) {
+        	mapTileNum = game.loadMap();
+        	tileNum = mapTileNum[row][col];
+        	Tile[] tiles = game.loadTiles();
+        	Tile currentTile = tiles[tileNum];
+        	BufferedImage img = cachedImages.get(currentTile.getNameClass());
+        	g2.drawImage(img, x, y,
+                    DimensionGame.TILESIZE,
+                    DimensionGame.TILESIZE, null);
+        	col++;
+        	x += DimensionGame.TILESIZE;
+        	
+        	if (col == DimensionGame.MAXWORLDCOL) {
+        		col = 0;
+        		row++;
+        		x = 0;
+        		y += DimensionGame.TILESIZE;
+        	}
+        }
+	}
+
+
+
 	@Override
 	protected void paintComponent(Graphics g) {
 	    super.paintComponent(g);
@@ -162,4 +198,6 @@ public class TheDOPOHardestGameGUI extends JPanel implements Runnable {
 	    draw(g2);
 	    g2.dispose();
 	}
+	
+	
 }
