@@ -26,6 +26,16 @@ public class TheDOPOHardestGame {
 	public HashMap<String, String> getElementsToDraw() throws IOException{
 		HashMap<String, String> elementsPath = new HashMap();
 		elementsPath = this.currentLevel.getElementsToDraw();
+		
+		//Carga las imagenes de las casillas 
+		Tile[] tiles = loadTiles();
+	    for (Tile t : tiles) {
+	        if (t != null && !elementsPath.containsKey(t.getNameClass())) {
+	            elementsPath.put(t.getNameClass(), t.getPathImage());
+	        }
+	    }
+		
+	    // Carga la imagen del jugador
 		Player py = getPlayer();
 		elementsPath.put(py.getNameClass(), py.getPathImage());
 		return elementsPath;

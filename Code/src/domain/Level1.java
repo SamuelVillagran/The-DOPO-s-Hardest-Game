@@ -2,8 +2,6 @@ package domain;
 
 public class Level1 extends Level {
 
-	
-	
 	public Level1() {
 		initialize();
 		map = new Map(1);
@@ -11,10 +9,12 @@ public class Level1 extends Level {
 
 	@Override
 	public void initialize() {
-		elements.put(elements.size(), new Obstacle());
 		elements.put(elements.size(), new Coin());
-		elements.put(elements.size(), new Floor());
 		elements.put(elements.size(), new Enemy());
+		elements.put(elements.size(), new Enemy(500, 500));
+		elements.put(elements.size(), new Coin(300, 300));
+		elements.put(elements.size(), new Coin(975, 150));
+		elements.put(elements.size(), new Enemy(750, 75));
 	}
 
 	@Override

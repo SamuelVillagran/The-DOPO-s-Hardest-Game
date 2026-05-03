@@ -8,6 +8,12 @@ public class Coin extends Colectible {
 		size = 0.5f;
 	}
 	
+	public Coin(int x, int y) {
+		posX = x;
+		posY = y;
+		size = 0.5f;
+	}
+	
 	@Override
 	public String getPathImage() {
 		return "/"+ getClass().getSuperclass().getSimpleName().toLowerCase()+"/"+getNameClass()+".png";

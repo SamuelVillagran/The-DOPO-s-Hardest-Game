@@ -10,6 +10,13 @@ public class Enemy extends Entity {
 		((StateEnemy) state).setEnemy(this);
 	}
 	
+	public Enemy(int x, int y) {
+		size = 0.5f;
+		posX = x; posY = y;
+		state = (StateEnemy) new Basic();
+		((StateEnemy) state).setEnemy(this);
+	}
+	
 	@Override
 	public void move(char direction) {
 		// TODO Auto-generated method stub
