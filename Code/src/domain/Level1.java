@@ -2,7 +2,10 @@ package domain;
 
 public class Level1 extends Level {
 
+	
+	
 	public Level1() {
+		numCoin = 3;
 		initialize();
 		map = new Map(1);
 	}

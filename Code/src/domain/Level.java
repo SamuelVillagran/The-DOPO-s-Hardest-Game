@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 public abstract class Level {
 
+	protected static int numCoin; 
 	protected HashMap<Integer, Element> elements;
 	protected static Map map;
 	
@@ -17,6 +18,7 @@ public abstract class Level {
 	 * 
 	 */
 	public Level() {
+		numCoin = 0;
 		elements = new HashMap<>();
 	}
 	
