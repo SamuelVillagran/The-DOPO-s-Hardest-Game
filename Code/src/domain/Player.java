@@ -8,10 +8,13 @@ public class Player extends Entity {
 	private int nCurrentMap;
 	
 	public Player() {
-
+		live = 1;
+		deaths = 0;
+		countBall = 0;
 		setAttributesPlayer(100, 100, 2, "");
 		state = new Red();
 		((StatePY) state).setPlayer(this);
+		size = 0.5f;
 	}
 	
 	/**
