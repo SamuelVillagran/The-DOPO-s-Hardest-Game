@@ -1,7 +1,11 @@
 package domain;
 
-public interface StatePY extends StateEntity {
+public abstract class StatePY implements StateEntity {
 
-	void setAttributesPlayer();
-	void setPlayer(Player py);
+	private Player py;
+	
+	public abstract void setAttributesPlayer();
+	public void setPlayer(Player py) {
+		this.py = py;
+	}
 }

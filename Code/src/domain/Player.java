@@ -107,17 +107,7 @@ public class Player extends Entity {
 		statePY.setAttributesPlayer();
 	}
 	
-	public String getNameClass() {
-		return this.getClass().getSimpleName().toLowerCase();
-	}
 	
-	public String getNameState() {
-		return state.getClass().getSimpleName().toLowerCase();
-	}
-	
-	public String getPathImage() {
-		return "/"+getNameClass()+"/"+getNameState()+".png";		
-	}
 
 	public void move(char direction) {
 		switch (direction) {

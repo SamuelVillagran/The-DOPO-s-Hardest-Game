@@ -5,7 +5,6 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import domain.Element;
-import domain.Map;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -32,8 +31,9 @@ public class TheDOPOHardestGameGUI extends JPanel implements Runnable {
 	
 	/**
 	 * Inicializate the game panel
+	 * @throws IOException 
 	 */
-	public TheDOPOHardestGameGUI() {
+	public TheDOPOHardestGameGUI() throws IOException {
 		game = new TheDOPOHardestGame();
 		cachedImages = new HashMap<>();
 		prepareElements();
@@ -52,12 +52,12 @@ public class TheDOPOHardestGameGUI extends JPanel implements Runnable {
 		this.addKeyListener(keyH);
 	}
 
-	private void prepareElements() {
+	private void prepareElements() throws IOException {
 		setScreen();
 		loadImages(); // <-- cargar una sola vez
     }
 
-    private void loadImages() {
+    private void loadImages() throws IOException {
         HashMap<String, String> paths = game.getElementsToDraw();
         for (Entry<String, String> entry : paths.entrySet()) {
             try {
@@ -131,9 +131,11 @@ public class TheDOPOHardestGameGUI extends JPanel implements Runnable {
 	public void draw(Graphics2D g2) {
         HashMap<Integer, Element> elements = game.getElements();
 
-        // Tiles, obstáculos, monedas //Ayudado por claude sonnet 4.6 IA 
+        // Tiles, obstáculos, monedas //Ayudado por claude sonnet 4.6 IA a poner el player encima
+        int count = 0;
+        Player py = game.getPlayer();
         for (Element e : elements.values()) {
-            if (e instanceof Player) continue;
+            if (e.equals(py)) continue;
             BufferedImage img = cachedImages.get(e.getNameClass());
             if (img != null) {
                 g2.drawImage(img, e.getPosX(), e.getPosY(),
@@ -143,7 +145,7 @@ public class TheDOPOHardestGameGUI extends JPanel implements Runnable {
         }
 
         // Player encima
-        Player py = game.getPlayer();
+        
         BufferedImage img = cachedImages.get(py.getNameClass());
         if (img != null) {
             g2.drawImage(img, py.getPosX(), py.getPosY(),
