@@ -14,17 +14,20 @@ public class Window {
 		
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.setResizable(false);
-		window.setTitle("Bad Ice Cream");
+		window.setTitle("The DOPO Hardest Game");
 		
-		TheDOPOHardestGameGUI gamePanel = new TheDOPOHardestGameGUI();
-		window.add(gamePanel);
+		//TheDOPOHardestGameGUI gamePanel = new TheDOPOHardestGameGUI();
+		//window.add(gamePanel);
+		GameContainer gameContainer = new GameContainer();
+		window.add(gameContainer);
+		
 		
 		window.pack();
 		
 		window.setLocationRelativeTo(null);
 		window.setVisible(true);
 		
-		gamePanel.startGameThread();
+		gameContainer.getPlayerModePanel().startGameThread();
 		
 		
 	}
