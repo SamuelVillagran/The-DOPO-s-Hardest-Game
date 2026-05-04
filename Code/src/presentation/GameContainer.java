@@ -24,6 +24,7 @@ public class GameContainer extends JPanel{
 	public static final String PLAYER_MODE = "player";
 	public static final String PVP_MODE = "pvp";
 	public static final String VS_MACHINE_MODE = "vsMachine";
+	public static final String PLAYER_CONFIG_MODE = "playerConfig";
 	
 	public GameContainer() {
 		prepareElements();
@@ -42,6 +43,7 @@ public class GameContainer extends JPanel{
 		cardPanel.setOpaque(false);
 		
 		cardPanel.add(new MenuPanel(this), MENU_MODE);
+		cardPanel.add(new PlayerConfig(this), PLAYER_CONFIG_MODE);
 		playerModePanel = new TheDOPOHardestGameGUI();
 		cardPanel.add(playerModePanel, PLAYER_MODE);
 		//cardPanel.add(new PlayerVsPlayerGUI(), "PVP MODE");

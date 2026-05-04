@@ -44,10 +44,11 @@ public class MenuPanel extends JPanel{
 	}
 	
 	private void prepareActions(GameContainer container) {
+		
 		btnPlayer.addActionListener(
 				new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						container.showMode(GameContainer.PLAYER_MODE);
+						container.showMode(GameContainer.PLAYER_CONFIG_MODE);
 					}
 				});
 		
@@ -65,6 +66,12 @@ public class MenuPanel extends JPanel{
 						container.showMode(GameContainer.VS_MACHINE_MODE);
 					}
 				});
+//		btnPlayer.addActionListener(
+//				new ActionListener() {
+//					public void actionPerformed(ActionEvent e) {
+//						container.showMode(GameContainer.PLAYER_MODE);
+//					}
+//				});
 	}
 	
 	private JButton createButton(String text) { // Propuesta OpenAI modificada.
