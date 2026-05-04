@@ -7,4 +7,16 @@ public abstract class Entity extends Element {
 	
 	public abstract void move(char direction);
 	
+	public String getNameClass() {
+		return this.getClass().getSimpleName().toLowerCase();
+	}
+	
+	public String getNameState() {
+		return state.getClass().getSimpleName().toLowerCase();
+	}
+	
+	public String getPathImage() {
+		return "/"+getNameClass()+"/"+getNameState()+".png";		
+	}
+	
 }

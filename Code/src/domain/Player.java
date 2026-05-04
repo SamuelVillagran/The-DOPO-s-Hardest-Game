@@ -11,7 +11,17 @@ public class Player extends Entity {
 		live = 1;
 		deaths = 0;
 		countBall = 0;
-		setAttributesPlayer(100, 100, 2, "");
+		setAttributesPlayer(75, 75, 2, "");
+		state = new Red();
+		((StatePY) state).setPlayer(this);
+		size = 0.5f;
+	}
+	
+	public Player(int x, int y) {
+		live = 1;
+		deaths = 0;
+		countBall = 0;
+		setAttributesPlayer(x, y, 2, "");
 		state = new Red();
 		((StatePY) state).setPlayer(this);
 		size = 0.5f;
@@ -107,17 +117,7 @@ public class Player extends Entity {
 		statePY.setAttributesPlayer();
 	}
 	
-	public String getNameClass() {
-		return this.getClass().getSimpleName().toLowerCase();
-	}
 	
-	public String getNameState() {
-		return state.getClass().getSimpleName().toLowerCase();
-	}
-	
-	public String getPathImage() {
-		return "/"+getNameClass()+"/"+getNameState()+".png";		
-	}
 
 	public void move(char direction) {
 		switch (direction) {
