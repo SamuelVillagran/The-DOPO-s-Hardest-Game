@@ -10,6 +10,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 
 import domain.DimensionGame;
 
@@ -44,7 +45,12 @@ public class GameContainer extends JPanel{
 		
 		cardPanel.add(new MenuPanel(this), MENU_MODE);
 		cardPanel.add(new PlayerConfig(this), PLAYER_CONFIG_MODE);
-		playerModePanel = new TheDOPOHardestGameGUI();
+		try {
+			playerModePanel = new TheDOPOHardestGameGUI();
+		} catch(Exception e) {
+			JOptionPane.showMessageDialog(null, "Ocurrió un error al cargar el juego");
+		}
+		
 		cardPanel.add(playerModePanel, PLAYER_MODE);
 		//cardPanel.add(new PlayerVsPlayerGUI(), "PVP MODE");
 		//cardPanel.add(new PlayerVsMachineGUI(), "PY VSMACHINE MODE"));

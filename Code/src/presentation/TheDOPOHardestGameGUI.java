@@ -97,7 +97,7 @@ public class TheDOPOHardestGameGUI extends JPanel implements Runnable {
 			timer += (currentTime - lastTime);
 			lastTime = currentTime;
 			if (delta >= 1) {
-				// 1. UPDATE:
+				// 1. UPDATE: 
 				update();
 				// 2. DRAW:
 				repaint();
