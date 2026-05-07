@@ -111,19 +111,17 @@ public class TheDOPOHardestGameGUI extends JPanel implements Runnable {
 	}
 
 	private void update() {
-		Player py = game.getPlayer();
-		
 		if (keyH.getUp() == true) {
-			py.move('u');
+			game.movePlayers('u');
 		}
 		if (keyH.getDown() == true) {
-			py.move('d');
+			game.movePlayers('d');
 		}
 		if (keyH.getLeft() == true) {
-			py.move('l');
+			game.movePlayers('l');
 		}
 		if (keyH.getRigth() == true) {
-			py.move('r');	
+			game.movePlayers('r');	
 		}
 	}
 
@@ -140,9 +138,8 @@ public class TheDOPOHardestGameGUI extends JPanel implements Runnable {
         
         // Tiles, obstáculos, monedas //Ayudado por claude sonnet 4.6 IA a poner el player encima
         
-        Player py = game.getPlayer();
         for (Element e : elements.values()) {
-            if (e.equals(py)) continue;
+            if (game.getPlayer().equals(e)) continue;
             BufferedImage img = cachedImages.get(e.getNameClass());
             if (img != null) {
                 g2.drawImage(img, e.getPosX(), e.getPosY(),

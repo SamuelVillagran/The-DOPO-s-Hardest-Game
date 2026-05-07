@@ -116,9 +116,11 @@ public class Player extends Entity {
 		statePY.setPlayer(this);
 		statePY.setAttributesPlayer();
 	}
-	
-	
 
+	/**
+	 * Makes move the player of game
+	 * @param direction direction is where going to move the player
+	 */
 	public void move(char direction) {
 		switch (direction) {
 			case 'u': posY -= speed;

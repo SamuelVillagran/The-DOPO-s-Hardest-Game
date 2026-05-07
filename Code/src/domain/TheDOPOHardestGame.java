@@ -70,6 +70,12 @@ public class TheDOPOHardestGame {
 		return tiles;
 	}
 	
+	public void movePlayers(char direction) {
+		for (Player py : players) {
+			py.move(direction);
+		}
+	}
+	
 	
 	public void setCurrentLevel(int numLevel) {
 		numCurrentLevel = numLevel;
