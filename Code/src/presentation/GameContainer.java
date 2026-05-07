@@ -18,7 +18,7 @@ public class GameContainer extends JPanel{
 
 	private BufferedImage backgroundImage;
 	private CardLayout cardLayout;
-	private JPanel cardPanel, tittlePanel;
+	private JPanel cardPanel;
 	private TheDOPOHardestGameGUI playerModePanel;
 	
 	public static final String MENU_MODE = "menu";
@@ -36,8 +36,8 @@ public class GameContainer extends JPanel{
 		setLayout(new BorderLayout());
 		setPreferredSize(new Dimension(DimensionGame.SCREENWIDTH, DimensionGame.SCREENHEIGHT));
 		
-		tittlePanel = buildTittlePanel();
-		add(tittlePanel, BorderLayout.NORTH);
+		/*tittlePanel = buildTittlePanel();
+		add(tittlePanel, BorderLayout.NORTH);*/
 		
 		cardLayout = new CardLayout();
 		cardPanel = new JPanel(cardLayout);
@@ -83,7 +83,7 @@ public class GameContainer extends JPanel{
 	
 	public void showMode(String mode) {
 		boolean isMenu = MENU_MODE.equals(mode);
-		tittlePanel.setVisible(isMenu);
+		//tittlePanel.setVisible(isMenu);
 		cardLayout.show(cardPanel, mode);
 		revalidate();
 		repaint();

@@ -53,11 +53,10 @@ public class Window extends JFrame {
     	setJMenuBar(menuBar);
 	}
 	
-
 	private void setScreen() {
 		setResizable(false);
 		setTitle("The DOPO Hardest Game");
-		
+		prepareElementsMenu();
 		//TheDOPOHardestGameGUI gamePanel = new TheDOPOHardestGameGUI();
 		//window.add(gamePanel);
 		GameContainer gameContainer = new GameContainer();
