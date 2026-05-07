@@ -1,6 +1,6 @@
 package domain;
 
-public abstract class Element implements GetInformation {
+public abstract class Element {
 
 	protected int posX, posY;
 	protected float size;

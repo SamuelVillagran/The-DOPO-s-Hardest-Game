@@ -1,6 +1,6 @@
 package domain;
 
-public abstract class StateEnemy implements StateEntity {
+public abstract class StateEnemy implements StateEntity  {
 
 	protected Enemy enemy;
 	

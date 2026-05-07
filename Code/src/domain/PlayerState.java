@@ -1,6 +1,6 @@
 package domain;
 
-public abstract class StatePY implements StateEntity {
+public abstract class PlayerState implements StateEntity {
 
 	private Player py;
 	

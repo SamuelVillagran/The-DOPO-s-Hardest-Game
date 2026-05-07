@@ -13,7 +13,7 @@ public class Player extends Entity {
 		countBall = 0;
 		setAttributesPlayer(75, 75, 2, "");
 		state = new Red();
-		((StatePY) state).setPlayer(this);
+		((PlayerState) state).setPlayer(this);
 		size = 0.5f;
 	}
 	
@@ -23,7 +23,7 @@ public class Player extends Entity {
 		countBall = 0;
 		setAttributesPlayer(x, y, 2, "");
 		state = new Red();
-		((StatePY) state).setPlayer(this);
+		((PlayerState) state).setPlayer(this);
 		size = 0.5f;
 	}
 	
@@ -111,7 +111,7 @@ public class Player extends Entity {
 		
 	}
 	
-	public void setState(StatePY statePY) {
+	public void setState(PlayerState statePY) {
 		this.state = statePY;
 		statePY.setPlayer(this);
 		statePY.setAttributesPlayer();

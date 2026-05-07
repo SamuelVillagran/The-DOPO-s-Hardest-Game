@@ -1,6 +1,6 @@
 package domain;
 
-public class Red extends StatePY {
+public class Red extends PlayerState {
 
 	private Player py;
 	
