@@ -133,10 +133,9 @@ public class TheDOPOHardestGameGUI extends JPanel implements Runnable {
 	public void draw(Graphics2D g2) {
         HashMap<Integer, Element> elements = game.getElements();
 
-        
         loadMap(g2);
         
-        // Tiles, obstáculos, monedas //Ayudado por claude sonnet 4.6 IA a poner el player encima
+        // Dibujar; Tiles, obstáculos, monedas //Ayudado por claude sonnet 4.6 IA a poner el player encima
         
         for (Element e : elements.values()) {
             if (game.getPlayer().equals(e)) continue;
@@ -146,15 +145,11 @@ public class TheDOPOHardestGameGUI extends JPanel implements Runnable {
                     (int)(e.getSize() * DimensionGame.TILESIZEWIDTH),
                     (int)(e.getSize() * DimensionGame.TILESIZEWIDTH), null);
             }
-        }
-        
-        
+        }        
 
         // Player encima
-        
         BufferedImage img = cachedImages.get("player");
         if (img != null) {
-        	
             g2.drawImage(img, game.getPlayer().getPosX(), game.getPlayer().getPosY(),
                 (int)(game.getPlayer().getSize() * DimensionGame.TILESIZEWIDTH),
                 (int)(game.getPlayer().getSize() * DimensionGame.TILESIZEWIDTH), null);
