@@ -1,6 +1,6 @@
 package domain;
 
-public abstract class DinamicTile {
+public abstract class DinamicTile extends Tile {
 
 	private boolean isActive; 
 	
