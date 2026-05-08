@@ -152,11 +152,12 @@ public class TheDOPOHardestGameGUI extends JPanel implements Runnable {
 
         // Player encima
         
-        BufferedImage img = cachedImages.get(py.getNameClass());
+        BufferedImage img = cachedImages.get("player");
         if (img != null) {
-            g2.drawImage(img, py.getPosX(), py.getPosY(),
-                (int)(py.getSize() * DimensionGame.TILESIZEWIDTH),
-                (int)(py.getSize() * DimensionGame.TILESIZEWIDTH), null);
+        	
+            g2.drawImage(img, game.getPlayer().getPosX(), game.getPlayer().getPosY(),
+                (int)(game.getPlayer().getSize() * DimensionGame.TILESIZEWIDTH),
+                (int)(game.getPlayer().getSize() * DimensionGame.TILESIZEWIDTH), null);
         }
     }
 
@@ -185,8 +186,6 @@ public class TheDOPOHardestGameGUI extends JPanel implements Runnable {
         	}
         }
 	}
-
-
 
 	@Override
 	protected void paintComponent(Graphics g) {
