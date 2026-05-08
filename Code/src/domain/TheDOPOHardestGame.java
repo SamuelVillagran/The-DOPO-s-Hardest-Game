@@ -60,8 +60,8 @@ public class TheDOPOHardestGame {
 	
 	
 	/**
-	 * 
-	 * @return An Array of diferent types of tile 0: Floor, 1: Obstacle
+	 * Load every tile that there are at the game
+	 * @return An Array of different types of tile 0: Floor, 1: Obstacle
 	 */
 	public Tile[] loadTiles() {
 		Tile[] tiles = new Tile[10];

@@ -10,7 +10,7 @@ import java.util.HashSet;
 public class Map {
 
 	private int[][] mapTileNum;
-	
+	private Figure polygon;
 	
 	public Map(int level) {
 		mapTileNum = new int[DimensionGame.MAXWORLDROW][DimensionGame.MAXWORLDCOL];
