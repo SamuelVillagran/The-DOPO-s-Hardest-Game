@@ -1,14 +1,14 @@
 package domain;
 
-public class Red extends PlayerState {
-	
-	public Red(Player py) {
+public class SlowedState extends PlayerState{
+
+	public SlowedState(Player py) {
 		super(py);
 	}
 
 	@Override
 	public int getSpeed() {
-		return 100;
+		return 70;
 	}
 
 	@Override
@@ -27,4 +27,6 @@ public class Red extends PlayerState {
 		
 	}
 	
+	
+
 }

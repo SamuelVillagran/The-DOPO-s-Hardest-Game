@@ -1,30 +1,29 @@
 package domain;
 
-public class Red extends PlayerState {
-	
-	public Red(Player py) {
+public class Blue extends PlayerState{
+
+	public Blue(Player py) {
 		super(py);
 	}
 
 	@Override
 	public int getSpeed() {
-		return 100;
+		return 200;
 	}
 
 	@Override
 	public int getWidth() {
-		return 32;
+		return 45;
 	}
 
 	@Override
 	public int getHeight() {
-		return 32;
+		return 45;
 	}
 
 	@Override
 	public void onEnemyContact() {
 		py.setState(new DeadState(py));
-		
 	}
-	
+
 }

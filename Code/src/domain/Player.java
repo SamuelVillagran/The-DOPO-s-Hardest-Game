@@ -1,29 +1,40 @@
 package domain;
 
-public class Player extends Entity {
+public class Player extends Entity implements Collisionable{
 
 	private int countBall;
 	private int deaths;
-	private int live;
-	private int nCurrentMap;
+	protected PlayerState state;
 	
-	public Player() {
-		live = 1;
+	/**
+	 * 
+	 * @param type
+	 * @throws HardestGameException
+	 */
+	public Player(PlayerType type) throws HardestGameException {
 		deaths = 0;
 		countBall = 0;
-		setAttributesPlayer(75, 75, 2, "");
-		state = new Red();
-		((PlayerState) state).setPlayer(this);
+		//setAttributesPlayer(75, 75, 2, "");
+		this.state = createInitialState(type);
+		//((PlayerState) state).setPlayer(this);
 		size = 0.5f;
 	}
 	
+	private PlayerState createInitialState(PlayerType type) throws HardestGameException {
+		switch (type){
+		case RED : return new Red(this);
+		//case BLUE : return new Blue(this);
+		//case GREEN : return new Green(this);
+		default : throw new HardestGameException(HardestGameException.PLAYER_TYPE_UNKNOWN); 
+		}
+	}
+	
 	public Player(int x, int y) {
-		live = 1;
 		deaths = 0;
 		countBall = 0;
-		setAttributesPlayer(x, y, 2, "");
-		state = new Red();
-		((PlayerState) state).setPlayer(this);
+		//setAttributesPlayer(x, y, 2, "");
+		state = new Red(this);
+		//((PlayerState) state).setPlayer(this);
 		size = 0.5f;
 	}
 	
@@ -104,17 +115,19 @@ public class Player extends Entity {
 		return speed;
 	}
 
-	public void setAttributesPlayer(int x, int y, int speed, String color) {
+	public void setAttributesPlayer(int x, int y, int speed) {
 		posX = x;
 		posY = y;
 		this.speed = speed;
 		
 	}
 	
+	/**
+	 * Change the state of the Player
+	 * @param statePY the new state wished: it could be Slowed or Dead.
+	 */
 	public void setState(PlayerState statePY) {
 		this.state = statePY;
-		statePY.setPlayer(this);
-		statePY.setAttributesPlayer();
 	}
 
 	/**
@@ -123,15 +136,38 @@ public class Player extends Entity {
 	 */
 	public void move(char direction) {
 		switch (direction) {
-			case 'u': posY -= speed;
+			case 'u': posY -= state.getSpeed();
 				break;
-			case 'd': posY += speed;
+			case 'd': posY += state.getSpeed();
 				break;
-			case 'l': posX -= speed;
+			case 'l': posX -= state.getSpeed();
 				break;
-			case 'r': posX += speed;
+			case 'r': posX += state.getSpeed();
 				break;
 		}
+	}
+	
+	/**
+	 * Check if the player is dead.
+	 * @return
+	 */
+	public boolean isDead() {
+		return state.isDead();
+	}
+	
+	@Override
+	public int getWidth() {
+		return state.getWidth();
+	}
+	
+	@Override
+	public int getHeight() {
+		return state.getHeight();
+	}
+	
+	@Override
+	public boolean isSolid() {
+		return true;
 	}
 
 }
