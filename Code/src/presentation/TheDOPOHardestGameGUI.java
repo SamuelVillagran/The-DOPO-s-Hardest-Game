@@ -137,7 +137,7 @@ public class TheDOPOHardestGameGUI extends JPanel implements Runnable {
         
         // Dibujar; Tiles, obstáculos, monedas //Ayudado por claude sonnet 4.6 IA a poner el player encima
         for (Element e : elements.values()) {
-            if (game.getPlayer().equals(e)) continue;
+            if (game.getPlayer1().equals(e)) continue;
             BufferedImage img = cachedImages.get(e.getNameClass());
             if (img != null) {
                 g2.drawImage(img, e.getPosX(), e.getPosY(),
@@ -149,9 +149,9 @@ public class TheDOPOHardestGameGUI extends JPanel implements Runnable {
         // Player encima
         BufferedImage img = cachedImages.get("player");
         if (img != null) {
-            g2.drawImage(img, game.getPlayer().getPosX(), game.getPlayer().getPosY(),
-                (int)(game.getPlayer().getSize() * DimensionGame.TILESIZEWIDTH),
-                (int)(game.getPlayer().getSize() * DimensionGame.TILESIZEWIDTH), null);
+            g2.drawImage(img, game.getPlayer1().getPosX(), game.getPlayer1().getPosY(),
+                (int)(game.getPlayer1().getSize() * DimensionGame.TILESIZEWIDTH),
+                (int)(game.getPlayer1().getSize() * DimensionGame.TILESIZEWIDTH), null);
         }
     }
 
@@ -160,23 +160,26 @@ public class TheDOPOHardestGameGUI extends JPanel implements Runnable {
 		int col = 0, row = 0, x = 0, y =0;
         int tileNum;
         int[][] mapTileNum = new int[DimensionGame.MAXWORLDROW][DimensionGame.MAXWORLDCOL];
+        Tile currentTile;
         while (col < DimensionGame.MAXWORLDCOL && row <  DimensionGame.MAXWORLDROW) {
         	mapTileNum = game.loadMap();
         	tileNum = mapTileNum[row][col];
         	Tile[] tiles = game.loadTiles();
-        	Tile currentTile = tiles[tileNum];
-        	BufferedImage img = cachedImages.get(currentTile.getNameClass());
-        	g2.drawImage(img, x, y,
-                    DimensionGame.TILESIZE,
-                    DimensionGame.TILESIZE, null);
-        	col++;
-        	x += DimensionGame.TILESIZE;
-        	
-        	if (col == DimensionGame.MAXWORLDCOL) {
-        		col = 0;
-        		row++;
-        		x = 0;
-        		y += DimensionGame.TILESIZE;
+        	if (tileNum < 9 && tileNum >= 0) {
+	        	currentTile = tiles[tileNum];
+	        	BufferedImage img = cachedImages.get(currentTile.getNameClass());
+	        	g2.drawImage(img, x, y,
+	                    DimensionGame.TILESIZE,
+	                    DimensionGame.TILESIZE, null);
+	        	col++;
+	        	x += DimensionGame.TILESIZE;
+	        	
+	        	if (col == DimensionGame.MAXWORLDCOL) {
+	        		col = 0;
+	        		row++;
+	        		x = 0;
+	        		y += DimensionGame.TILESIZE;
+	        	}
         	}
         }
 	}

@@ -2,7 +2,15 @@ package domain;
 
 public abstract class DinamicTile extends Tile {
 
-	private boolean isActive; 
+	private boolean isActive;
+	
+	public String getNameSuperClass() {
+		return this.getClass().getSuperclass().getSimpleName();
+	}
+	
+	public String getClassName() {
+		return this.getClass().getSimpleName();
+	}
 	
 	/**
 	 * This make the interactions at the levels with the entities
