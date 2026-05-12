@@ -16,10 +16,10 @@ public class Level1 extends Level {
 	@Override
 	public void initialize() {
 		int desface = DimensionGame.TILESIZE/2;
-		elements.put(elements.size(), new Enemy(7*DimensionGame.TILESIZEWIDTH-desface, 8*DimensionGame.TILESIZEHEIGHT-desface));
-		elements.put(elements.size(), new Enemy(25*DimensionGame.TILESIZEWIDTH-desface, 9*DimensionGame.TILESIZEHEIGHT-desface));
-		elements.put(elements.size(), new Enemy(7*DimensionGame.TILESIZEWIDTH-desface, 10*DimensionGame.TILESIZEHEIGHT-desface));
-		elements.put(elements.size(), new Enemy(25*DimensionGame.TILESIZEWIDTH-desface, 11*DimensionGame.TILESIZEHEIGHT-desface));
+		elements.put(elements.size(), new Enemy(6*DimensionGame.TILESIZEWIDTH, 9*DimensionGame.TILESIZEHEIGHT-desface));
+		elements.put(elements.size(), new Enemy(25*DimensionGame.TILESIZEWIDTH-desface, 10*DimensionGame.TILESIZEHEIGHT-desface));
+		elements.put(elements.size(), new Enemy(6*DimensionGame.TILESIZEWIDTH, 11*DimensionGame.TILESIZEHEIGHT-desface));
+		elements.put(elements.size(), new Enemy(25*DimensionGame.TILESIZEWIDTH-desface, 12*DimensionGame.TILESIZEHEIGHT-desface));
 		
 	}
 
