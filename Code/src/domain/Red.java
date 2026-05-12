@@ -13,7 +13,7 @@ public class Red extends PlayerState {
 
 	@Override
 	public int getWidth() {
-		return 50;
+		return 32;
 	}
 
 	@Override
