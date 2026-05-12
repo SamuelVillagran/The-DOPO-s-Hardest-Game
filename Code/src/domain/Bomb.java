@@ -8,16 +8,18 @@ public class Bomb extends DinamicTile {
 		this.posY = posY;
 	}
 	
+	public Bomb() {
+		
+	}
+
 	@Override
 	public String getPathImage() {
-		// TODO Auto-generated method stub
-		return null;
+		return "/tile/"+getNameClass()+".png";
 	}
 
 	@Override
 	public String getNameClass() {
-		// TODO Auto-generated method stub
-		return null;
+		return getClass().getSimpleName().toLowerCase();
 	}
 
 	@Override

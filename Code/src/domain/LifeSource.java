@@ -10,14 +10,13 @@ public class LifeSource extends DinamicTile {
 	
 	@Override
 	public String getPathImage() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return super.getNameSuperClass()+"/"+super.getClassName()+"/"+this.getClassName()+".png";
 	}
 
 	@Override
 	public String getNameClass() {
-		// TODO Auto-generated method stub
-		return null;
+		return getClass().getSimpleName();
 	}
 
 

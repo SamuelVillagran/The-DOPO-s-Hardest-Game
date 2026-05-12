@@ -23,6 +23,8 @@ import javax.swing.JTextField;
 import domain.HardestGameException;
 import domain.PlayerType;
 
+
+
 public class PlayerConfig extends JPanel{
 	
 	private static final Color TEXT_COLOR    = new Color(220, 220, 220);
@@ -208,6 +210,7 @@ public class PlayerConfig extends JPanel{
 	
 	private void prepareActionStart(GameContainer container) {
 		startBtn.addActionListener(e -> {
+
 			String name = nameField.getText();
 			if(name.isEmpty()) {
 				JOptionPane.showMessageDialog(this, "Ingrese un nombre");
@@ -221,6 +224,7 @@ public class PlayerConfig extends JPanel{
 			} catch (HardestGameException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
+
 			}
 		});
 	}

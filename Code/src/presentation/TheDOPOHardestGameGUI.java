@@ -4,9 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import domain.Element;
-import domain.GameMode;
-import domain.HardestGameException;
+
 
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
@@ -20,7 +18,9 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import domain.DimensionGame;
-import domain.Player;
+import domain.Element;
+import domain.GameMode;
+import domain.HardestGameException;
 import domain.TheDOPOHardestGame;
 import domain.Tile;
 
@@ -64,6 +64,9 @@ public class TheDOPOHardestGameGUI extends JPanel implements Runnable {
 		loadImages(); // <-- cargar una sola vez
     }
 
+	/*
+	 * Load the paths of images of objects of game
+	 */
     private void loadImages() throws IOException {
     	HashMap<String, String> paths = game.getElementsToDraw();
         for (Entry<String, String> entry : paths.entrySet()) {
@@ -90,6 +93,9 @@ public class TheDOPOHardestGameGUI extends JPanel implements Runnable {
 		this.setFocusable(true);
 	}
 
+	/**
+	 * Make a thread to game run with time
+	 */
 	@Override
 	public void run() {
 
@@ -124,6 +130,9 @@ public class TheDOPOHardestGameGUI extends JPanel implements Runnable {
 		}
 	}
 
+	/**
+	 * Make the interaction of keyboard with the player
+	 */
 	private void update() {
 		if (keyH.getUp() == true) {
 			game.movePlayers('u');
@@ -139,11 +148,18 @@ public class TheDOPOHardestGameGUI extends JPanel implements Runnable {
 		}
 	}
 
+	/**
+	 * Make game thread run
+	 */
 	public void startGameThread() {
 		gameThread = new Thread(this);
 		gameThread.start();
 	}
 	
+	/**
+	 * Draw at a panel g2 different entitys
+	 * @param g2
+	 */
 	public void draw(Graphics2D g2) {
         HashMap<Integer, Element> elements = game.getElements();
 
@@ -151,7 +167,7 @@ public class TheDOPOHardestGameGUI extends JPanel implements Runnable {
         
         // Dibujar; Tiles, obstáculos, monedas //Ayudado por claude sonnet 4.6 IA a poner el player encima
         for (Element e : elements.values()) {
-            if (game.getPlayer().equals(e)) continue;
+            if (game.getPlayer1().equals(e)) continue;
             BufferedImage img = cachedImages.get(e.getNameClass());
             if (img != null) {
                 g2.drawImage(img, e.getPosX(), e.getPosY(),
@@ -163,38 +179,48 @@ public class TheDOPOHardestGameGUI extends JPanel implements Runnable {
         // Player encima
         BufferedImage img = cachedImages.get("player");
         if (img != null) {
-            g2.drawImage(img, game.getPlayer().getPosX(), game.getPlayer().getPosY(),
-                (int)(game.getPlayer().getSize() * game.getPlayer().getWidth()),
-                (int)(game.getPlayer().getSize() * game.getPlayer().getHeight()), null);
+
+            g2.drawImage(img, game.getPlayer1().getPosX(), game.getPlayer1().getPosY(),
+                (int)(game.getPlayer1().getSize() * game.getPlayer1().getWidth()),
+                (int)(game.getPlayer1().getSize() * game.getPlayer1().getHeight()), null);
+
         }
     }
 
-	
+	/*
+	 * Load and draw tiles of map to the panel
+	 */
 	private void loadMap(Graphics2D g2) {
 		int col = 0, row = 0, x = 0, y =0;
         int tileNum;
         int[][] mapTileNum = new int[DimensionGame.MAXWORLDROW][DimensionGame.MAXWORLDCOL];
+        Tile currentTile;
         while (col < DimensionGame.MAXWORLDCOL && row <  DimensionGame.MAXWORLDROW) {
         	mapTileNum = game.loadMap();
         	tileNum = mapTileNum[row][col];
         	Tile[] tiles = game.loadTiles();
-        	Tile currentTile = tiles[tileNum];
-        	BufferedImage img = cachedImages.get(currentTile.getNameClass());
-        	g2.drawImage(img, x, y,
-                    DimensionGame.TILESIZE,
-                    DimensionGame.TILESIZE, null);
-        	col++;
-        	x += DimensionGame.TILESIZE;
-        	
-        	if (col == DimensionGame.MAXWORLDCOL) {
-        		col = 0;
-        		row++;
-        		x = 0;
-        		y += DimensionGame.TILESIZE;
+        	if (tileNum < 9 && tileNum >= 0) {
+	        	currentTile = tiles[tileNum];
+	        	BufferedImage img = cachedImages.get(currentTile.getNameClass());
+	        	g2.drawImage(img, x, y,
+	                    DimensionGame.TILESIZE,
+	                    DimensionGame.TILESIZE, null);
+	        	col++;
+	        	x += DimensionGame.TILESIZE;
+	        	
+	        	if (col == DimensionGame.MAXWORLDCOL) {
+	        		col = 0;
+	        		row++;
+	        		x = 0;
+	        		y += DimensionGame.TILESIZE;
+	        	}
         	}
         }
 	}
-
+	
+	/**
+	 * Paint components at the graphic
+	 */
 	@Override
 	protected void paintComponent(Graphics g) {
 	    super.paintComponent(g);

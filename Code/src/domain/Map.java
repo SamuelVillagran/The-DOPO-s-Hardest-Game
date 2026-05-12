@@ -35,8 +35,8 @@ public class Map {
 				String line = br.readLine();
 				
 				while (col < DimensionGame.MAXWORLDCOL) {
-					String numbers[] = line.split(" ");
-					
+					String numbers[] = line.trim().split("\\s+");
+				
 					int num = Integer.parseInt(numbers[col]);
 					
 					mapTileNum[row][col] = num;
