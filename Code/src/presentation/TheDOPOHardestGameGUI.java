@@ -41,7 +41,7 @@ public class TheDOPOHardestGameGUI extends JPanel implements Runnable {
 	 * @throws HardestGameException 
 	 */
 	public TheDOPOHardestGameGUI(GameMode gameMode) throws IOException, HardestGameException {
-		game = new TheDOPOHardestGame();
+		game = new TheDOPOHardestGame(1);
 		game.startGame(gameMode, 1);
 		//game = new TheDOPOHardestGame(1);
 		cachedImages = new HashMap<>();

@@ -4,8 +4,8 @@ public class Basic extends StateEnemy {
 
 	
 	
-	public Basic() {
-		
+	public Basic(Enemy enemy) {
+		this.enemy = enemy;
 	}
 	
 }

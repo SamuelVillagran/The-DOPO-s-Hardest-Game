@@ -10,7 +10,7 @@ import java.util.HashSet;
 
 public class TheDOPOHardestGame {
 
-	private Level currentLevel;
+	private static Level currentLevel;
 	private ArrayList<Player> players;
 	private static int numCurrentLevel;
 	private GameMode gameMode;
@@ -22,23 +22,20 @@ public class TheDOPOHardestGame {
 	 */
 	public TheDOPOHardestGame(int numCurrentLevel) throws HardestGameException { // String filePathMap como parametro
 		players = new ArrayList<>();
-		players.add(new Player(PlayerType.RED, "Raul"));
-		this.currentLevel = new Level1();
+		Player py = new Player(PlayerType.RED, "Raul");
+		players.add(py);
+		this.currentLevel = new Level1(py);
 		this.numCurrentLevel = numCurrentLevel;
-	}
-	
-	public TheDOPOHardestGame () {
-		
 	}
 	
 	public void startGame(GameMode gameMode, int numCurrentLevel) throws HardestGameException {
 		this.gameMode = gameMode;
 		this.numCurrentLevel = numCurrentLevel; 
-		this.currentLevel = new Level1();
 		players = new ArrayList<>(gameMode.createPlayers());
+		if (gameMode.equals("game")) {
+			this.currentLevel = new Level1(players.get(0));
+		}
 	}
-	
-	
 	
 	/**
 	 * Give elements to GUI can draw it 

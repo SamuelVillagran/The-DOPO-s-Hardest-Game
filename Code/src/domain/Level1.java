@@ -5,20 +5,22 @@ import java.util.List;
 
 public class Level1 extends Level {
 
-	public Level1() {
+	public Level1(Player py) {
+		int desface = DimensionGame.TILESIZE/2;
 		numCoin = 3;
 		initialize();
 		map = new Map(1);
+		py.setAttributesPlayer(4*DimensionGame.TILESIZEWIDTH-desface, 8*DimensionGame.TILESIZEHEIGHT-desface);
 	}
 
 	@Override
 	public void initialize() {
-		elements.put(elements.size(), new Coin());
-		elements.put(elements.size(), new Enemy());
-		elements.put(elements.size(), new Enemy(500, 500));
-		elements.put(elements.size(), new Coin(300, 300));
-		elements.put(elements.size(), new Coin(975, 150));
-		elements.put(elements.size(), new Enemy(750, 75));
+		int desface = DimensionGame.TILESIZE/2;
+		elements.put(elements.size(), new Enemy(7*DimensionGame.TILESIZEWIDTH-desface, 8*DimensionGame.TILESIZEHEIGHT-desface));
+		elements.put(elements.size(), new Enemy(25*DimensionGame.TILESIZEWIDTH-desface, 9*DimensionGame.TILESIZEHEIGHT-desface));
+		elements.put(elements.size(), new Enemy(7*DimensionGame.TILESIZEWIDTH-desface, 10*DimensionGame.TILESIZEHEIGHT-desface));
+		elements.put(elements.size(), new Enemy(25*DimensionGame.TILESIZEWIDTH-desface, 11*DimensionGame.TILESIZEHEIGHT-desface));
+		
 	}
 
 	@Override

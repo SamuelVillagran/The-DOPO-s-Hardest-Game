@@ -3,8 +3,6 @@ package domain;
 public class GreenTile extends Tile {
 
 	
-	
-	
 
 	@Override
 	public int getWidth() {
