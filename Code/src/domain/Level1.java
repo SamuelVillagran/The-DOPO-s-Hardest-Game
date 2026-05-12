@@ -39,7 +39,7 @@ public class Level1 extends Level {
 	}
 	
 	public void spawnPlayers(List<Player> pys) {
-		int desface = DimensionGame.TILESIZE/2, sizePys = pys.size();
+		int desface = DimensionGame.TILESIZE/4, sizePys = pys.size();
 		if (sizePys == 1) {
 			pys.get(0).setAttributesPlayer(4*DimensionGame.TILESIZEWIDTH-desface, 8*DimensionGame.TILESIZEHEIGHT-desface);
 		}
