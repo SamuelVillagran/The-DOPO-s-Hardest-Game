@@ -64,6 +64,9 @@ public class TheDOPOHardestGameGUI extends JPanel implements Runnable {
 		loadImages(); // <-- cargar una sola vez
     }
 
+	/*
+	 * Load the paths of images of objects of game
+	 */
     private void loadImages() throws IOException {
     	HashMap<String, String> paths = game.getElementsToDraw();
         for (Entry<String, String> entry : paths.entrySet()) {
@@ -90,6 +93,9 @@ public class TheDOPOHardestGameGUI extends JPanel implements Runnable {
 		this.setFocusable(true);
 	}
 
+	/**
+	 * Make a thread to game run with time
+	 */
 	@Override
 	public void run() {
 
@@ -124,6 +130,9 @@ public class TheDOPOHardestGameGUI extends JPanel implements Runnable {
 		}
 	}
 
+	/**
+	 * Make the interaction of keyboard with the player
+	 */
 	private void update() {
 		if (keyH.getUp() == true) {
 			game.movePlayers('u');
@@ -139,11 +148,18 @@ public class TheDOPOHardestGameGUI extends JPanel implements Runnable {
 		}
 	}
 
+	/**
+	 * Make game thread run
+	 */
 	public void startGameThread() {
 		gameThread = new Thread(this);
 		gameThread.start();
 	}
 	
+	/**
+	 * Draw at a panel g2 different entitys
+	 * @param g2
+	 */
 	public void draw(Graphics2D g2) {
         HashMap<Integer, Element> elements = game.getElements();
 
@@ -169,7 +185,9 @@ public class TheDOPOHardestGameGUI extends JPanel implements Runnable {
         }
     }
 
-	
+	/*
+	 * Load and draw tiles of map to the panel
+	 */
 	private void loadMap(Graphics2D g2) {
 		int col = 0, row = 0, x = 0, y =0;
         int tileNum;
@@ -194,7 +212,10 @@ public class TheDOPOHardestGameGUI extends JPanel implements Runnable {
         	}
         }
 	}
-
+	
+	/**
+	 * Paint components at the graphic
+	 */
 	@Override
 	protected void paintComponent(Graphics g) {
 	    super.paintComponent(g);
