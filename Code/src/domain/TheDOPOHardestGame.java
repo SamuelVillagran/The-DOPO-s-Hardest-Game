@@ -14,6 +14,7 @@ public class TheDOPOHardestGame {
 	private ArrayList<Player> players;
 	private static int numCurrentLevel;
 	private GameMode gameMode;
+	private CollisionChecker cChecker;
 	
 	
 	public TheDOPOHardestGame(int numCurrentLevel) throws HardestGameException { // String filePathMap como parametro
@@ -23,17 +24,28 @@ public class TheDOPOHardestGame {
 		this.numCurrentLevel = numCurrentLevel;
 	}
 	
+	
+	/**
+	 * Constructor class to start game once Window is open.
+	 */
 	public TheDOPOHardestGame () {
+		cChecker = new CollisionChecker();
 		
 	}
 	
+	/**
+	 * Start the game with a specific characteristics.
+	 * @param gameMode specific Game Mode it could take values;
+	 * PlayerMode, PlaverVsMachine, PlayerVsPlayer.
+	 * @param numCurrentLevel the actual number level.
+	 * @throws HardestGameException
+	 */
 	public void startGame(GameMode gameMode, int numCurrentLevel) throws HardestGameException {
 		this.gameMode = gameMode;
 		this.numCurrentLevel = numCurrentLevel; 
 		this.currentLevel = new Level1();
 		players = new ArrayList<>(gameMode.createPlayers());
 	}
-	
 	
 	
 	
