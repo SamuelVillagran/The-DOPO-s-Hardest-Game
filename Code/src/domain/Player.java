@@ -25,8 +25,8 @@ public class Player extends Entity implements HitBox{
 	private PlayerState createInitialState(PlayerType type) throws HardestGameException {
 		switch (type){
 		case RED : return new Red(this);
-		//case BLUE : return new Blue(this);
-		//case GREEN : return new Green(this);
+		case BLUE : return new Blue(this);
+		case GREEN : return new Green(this);
 		default : throw new HardestGameException(HardestGameException.PLAYER_TYPE_UNKNOWN); 
 		}
 	}
