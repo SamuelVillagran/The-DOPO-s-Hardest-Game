@@ -2,7 +2,7 @@ package domain;
 
 import java.util.HashMap;
 
-public abstract class Level {
+public abstract class Level implements CollisionContext{
 
 	protected static int numCoin; 
 	protected HashMap<Integer, Element> elements;

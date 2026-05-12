@@ -1,5 +1,8 @@
 package domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Level1 extends Level {
 
 	public Level1() {
@@ -22,6 +25,17 @@ public class Level1 extends Level {
 	public boolean isCompleted() {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public List<Solid> getSolidEelements() {
+		List<Solid> solids = new ArrayList<>();
+		for(Element element : elements.values()) {
+			if(element instanceof Solid) {
+				solids.add((Solid) element);
+			}
+		}
+		return solids;
 	}
 	
 }
