@@ -108,8 +108,8 @@ public class TheDOPOHardestGame {
 		Tile[] tiles = new Tile[11];
 		tiles[0] = new Floor();
 		tiles[1] = new Obstacle();
-		tiles[2] = new Bomb();
-		tiles[3] = new GreenTile();
+		tiles[2] = new GreenTile();
+		tiles[3] = new Bomb();
 		return tiles;
 	}
 	

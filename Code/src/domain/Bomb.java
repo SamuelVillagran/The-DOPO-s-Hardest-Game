@@ -14,12 +14,12 @@ public class Bomb extends DinamicTile {
 
 	@Override
 	public String getPathImage() {
-		return getNameSuperClass()+"/"+getNameClass()+".png";
+		return "/tile/"+getNameClass()+".png";
 	}
 
 	@Override
 	public String getNameClass() {
-		return getClass().getSimpleName();
+		return getClass().getSimpleName().toLowerCase();
 	}
 
 	@Override
