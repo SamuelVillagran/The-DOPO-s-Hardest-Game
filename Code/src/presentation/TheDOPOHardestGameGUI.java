@@ -65,8 +65,12 @@ public class TheDOPOHardestGameGUI extends JPanel implements Runnable {
         HashMap<String, String> paths = game.getElementsToDraw();
         for (Entry<String, String> entry : paths.entrySet()) {
             try {
-                BufferedImage img = ImageIO.read(
-                    getClass().getResourceAsStream(entry.getValue()));
+                InputStream stream = getClass().getResourceAsStream(entry.getValue());
+                if (stream == null) {
+                    System.err.println("Recurso no encontrado: " + entry.getValue());
+                    continue;
+                }
+                BufferedImage img = ImageIO.read(stream);
                 cachedImages.put(entry.getKey(), img);
             } catch (IOException e) {
                 e.printStackTrace();

@@ -6,12 +6,12 @@ public class Goal extends Tile {
 	
 	@Override
 	public String getPathImage() {
-		return super.getNameSuperClass()+"/"+getNameClass();
+		return "/tile/greenTile.png";
 	}
 
 	@Override
 	public String getNameClass() {
-		return "greenTile.png";
+		return "goal";
 	}
 
 	

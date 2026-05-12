@@ -57,17 +57,12 @@ public class Window extends JFrame {
 		setResizable(false);
 		setTitle("The DOPO Hardest Game");
 		prepareElementsMenu();
-		//TheDOPOHardestGameGUI gamePanel = new TheDOPOHardestGameGUI();
-		//window.add(gamePanel);
 		GameContainer gameContainer = new GameContainer();
 		add(gameContainer);
 		
 		pack();
 		
 		setLocationRelativeTo(null);
-		
-		
-		gameContainer.getPlayerModePanel().startGameThread();
     }
     
     

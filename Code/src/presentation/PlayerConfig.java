@@ -201,6 +201,12 @@ public class PlayerConfig extends JPanel{
 	}
 	
 	private void prepareActionStart(GameContainer container) {
-		startBtn.addActionListener(e -> container.showMode(GameContainer.PLAYER_MODE));
+		startBtn.addActionListener(e -> {
+			TheDOPOHardestGameGUI panel = container.getPlayerModePanel();
+			if (panel != null) {
+				container.showMode(GameContainer.PLAYER_MODE);
+				panel.startGameThread();
+			}
+		});
 	}
 }

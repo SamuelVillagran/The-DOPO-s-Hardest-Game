@@ -46,11 +46,11 @@ public class GameContainer extends JPanel{
 		cardPanel.add(new PlayerConfig(this), PLAYER_CONFIG_MODE);
 		try {
 			playerModePanel = new TheDOPOHardestGameGUI();
+			cardPanel.add(playerModePanel, PLAYER_MODE);
 		} catch(Exception e) {
-			JOptionPane.showMessageDialog(null, "Ocurrió un error al cargar el juego");
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Ocurrió un error al cargar el juego: " + e.getMessage());
 		}
-		
-		cardPanel.add(playerModePanel, PLAYER_MODE);
 		//cardPanel.add(new PlayerVsPlayerGUI(), "PVP MODE");
 		//cardPanel.add(new PlayerVsMachineGUI(), "PY VSMACHINE MODE"));
 		cardLayout.show(cardPanel, MENU_MODE);
