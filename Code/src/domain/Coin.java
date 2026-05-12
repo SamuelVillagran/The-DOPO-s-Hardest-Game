@@ -23,5 +23,14 @@ public class Coin extends Colectible {
 	public String getNameClass() {
 		return  this.getClass().getSimpleName().toLowerCase();
 	}
-	
+
+	@Override
+	public int getWidth() {
+		return 15;
+	}
+
+	@Override
+	public int getHeight() {
+		return 15;
+	}
 }

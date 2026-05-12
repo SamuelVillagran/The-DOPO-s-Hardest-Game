@@ -1,6 +1,6 @@
 package domain;
 
-public abstract class Element {
+public abstract class Element implements HitBox{
 
 	protected int posX, posY;
 	protected float size;

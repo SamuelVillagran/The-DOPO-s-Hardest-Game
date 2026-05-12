@@ -1,11 +1,14 @@
 package domain;
 
-public class HumanPlayer extends Player {
 
-	public HumanPlayer(/*estrategia?*/int posX, int posY) {
-		this.posX = posX;
-		this.posY = posY;
+public class HumanPlayer extends Player{
+
+	public HumanPlayer(PlayerType type, String name) throws HardestGameException{
+		super(type, name);
 	}
 	
-	
+	@Override
+	public String getNameClass() {
+		return "player";
+	}
 }

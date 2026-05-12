@@ -48,14 +48,15 @@ public class MenuPanel extends JPanel{
 		btnPlayer.addActionListener(
 				new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						container.showMode(GameContainer.PLAYER_CONFIG_MODE);
+						container.onModeSelected(ModeType.SINGLE_PLAYER);
+						
 					}
 				});
 		
 		btnPvP.addActionListener(
 				new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						container.showMode(GameContainer.PVP_MODE);
+						container.onModeSelected(ModeType.PVP);
 					}
 				});
 		
@@ -63,7 +64,7 @@ public class MenuPanel extends JPanel{
 		btnVsMachine.addActionListener(
 				new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						container.showMode(GameContainer.VS_MACHINE_MODE);
+						container.onModeSelected(ModeType.PVM);
 					}
 				});
 //		btnPlayer.addActionListener(

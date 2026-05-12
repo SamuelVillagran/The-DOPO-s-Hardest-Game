@@ -20,4 +20,14 @@ public class Floor extends Tile {
 		return "/"+getNameSuperClass()+"/"+getNameClass()+".png";		
 	}
 
+	@Override
+	public int getWidth() {
+		return DimensionGame.TILESIZE;
+	}
+
+	@Override
+	public int getHeight() {
+		return DimensionGame.TILESIZE;
+	}
+
 }

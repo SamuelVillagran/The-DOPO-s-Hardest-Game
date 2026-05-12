@@ -1,24 +1,24 @@
 package domain;
 
-public class Red extends PlayerState {
-	
-	public Red(Player py) {
+public class SlowedState extends PlayerState{
+
+	public SlowedState(Player py) {
 		super(py);
 	}
 
 	@Override
 	public int getSpeed() {
-		return 2;
+		return 1;
 	}
 
 	@Override
 	public int getWidth() {
-		return 36;
+		return 32;
 	}
 
 	@Override
 	public int getHeight() {
-		return 36;
+		return 32;
 	}
 
 	@Override
@@ -27,4 +27,6 @@ public class Red extends PlayerState {
 		
 	}
 	
+	
+
 }

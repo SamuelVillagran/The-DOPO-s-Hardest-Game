@@ -1,11 +1,18 @@
 package domain;
 
 public abstract class PlayerState implements StateEntity {
-
-	private Player py;
+	protected Player py;
 	
-	public abstract void setAttributesPlayer();
-	public void setPlayer(Player py) {
-		this.py = py;
+	public PlayerState(Player player) {
+		py = player;
+	}
+	
+	public abstract int getSpeed();
+	public abstract int getWidth();
+	public abstract int getHeight();
+	public abstract void onEnemyContact();
+	
+	public boolean isDead(){ //Solo lo sobre escribirá DeadState
+		return false;
 	}
 }

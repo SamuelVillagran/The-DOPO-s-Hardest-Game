@@ -11,4 +11,14 @@ public class CheckPoint extends Tile{
 	public String getNameClass() {
 		return "greenTile.png";
 	}
+
+	@Override
+	public int getWidth() {
+		return 36;
+	}
+
+	@Override
+	public int getHeight() {
+		return 36;
+	}
 }

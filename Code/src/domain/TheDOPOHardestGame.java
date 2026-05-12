@@ -10,20 +10,34 @@ import java.util.HashSet;
 
 public class TheDOPOHardestGame {
 
-	private static Level currentLevel;
+	private Level currentLevel;
 	private ArrayList<Player> players;
 	private static int numCurrentLevel;
+	private GameMode gameMode;
 	
+
 	/**
 	 * Constructor for main class of domain TheDOPOHardestGame
 	 * @param numCurrentLevel
 	 */
-	public TheDOPOHardestGame(int numCurrentLevel) {
+	public TheDOPOHardestGame(int numCurrentLevel) throws HardestGameException { // String filePathMap como parametro
 		players = new ArrayList<>();
-		players.add(new Player());
+		players.add(new Player(PlayerType.RED, "Raul"));
 		this.currentLevel = new Level1();
 		this.numCurrentLevel = numCurrentLevel;
 	}
+	
+	public TheDOPOHardestGame () {
+		
+	}
+	
+	public void startGame(GameMode gameMode, int numCurrentLevel) throws HardestGameException {
+		this.gameMode = gameMode;
+		this.numCurrentLevel = numCurrentLevel; 
+		this.currentLevel = new Level1();
+		players = new ArrayList<>(gameMode.createPlayers());
+	}
+	
 	
 	
 	/**
@@ -94,7 +108,8 @@ public class TheDOPOHardestGame {
 		Tile[] tiles = new Tile[11];
 		tiles[0] = new Floor();
 		tiles[1] = new Obstacle();
-		tiles[3] = new Goal();
+		tiles[2] = new Bomb();
+		tiles[3] = new GreenTile();
 		return tiles;
 	}
 	

@@ -12,6 +12,9 @@ import javax.swing.JPanel;
 import javax.swing.JOptionPane;
 
 import domain.DimensionGame;
+import domain.GameMode;
+import domain.HardestGameException;
+import domain.PlayerType;
 
 public class GameContainer extends JPanel{
 
@@ -19,18 +22,18 @@ public class GameContainer extends JPanel{
 	private CardLayout cardLayout;
 	private JPanel cardPanel;
 	private TheDOPOHardestGameGUI playerModePanel;
+	private GameSetup setup;
 	
 	public static final String MENU_MODE = "menu";
-	public static final String PLAYER_MODE = "player";
-	public static final String PVP_MODE = "pvp";
-	public static final String VS_MACHINE_MODE = "vsMachine";
 	public static final String PLAYER_CONFIG_MODE = "playerConfig";
+	public static final String GAME_MODE = "game";
 	
 	public GameContainer() {
 		prepareElements();
 	}
 
 	private void prepareElements(){
+		setup = new GameSetup();
 		loadImages();
 		setLayout(new BorderLayout());
 		setPreferredSize(new Dimension(DimensionGame.SCREENWIDTH, DimensionGame.SCREENHEIGHT));
@@ -44,15 +47,7 @@ public class GameContainer extends JPanel{
 		
 		cardPanel.add(new MenuPanel(this), MENU_MODE);
 		cardPanel.add(new PlayerConfig(this), PLAYER_CONFIG_MODE);
-		try {
-			playerModePanel = new TheDOPOHardestGameGUI();
-			cardPanel.add(playerModePanel, PLAYER_MODE);
-		} catch(Exception e) {
-			e.printStackTrace();
-			JOptionPane.showMessageDialog(null, "Ocurrió un error al cargar el juego: " + e.getMessage());
-		}
-		//cardPanel.add(new PlayerVsPlayerGUI(), "PVP MODE");
-		//cardPanel.add(new PlayerVsMachineGUI(), "PY VSMACHINE MODE"));
+		
 		cardLayout.show(cardPanel, MENU_MODE);
 		add(cardPanel, BorderLayout.CENTER);
 	}
@@ -86,12 +81,38 @@ public class GameContainer extends JPanel{
 		cardLayout.show(cardPanel, mode);
 		revalidate();
 		repaint();
-		if (PLAYER_MODE.equals(mode)) {
-			playerModePanel.requestFocusInWindow();
-		}
+//		if (PLAYER_MODE.equals(mode)) {
+//			playerModePanel.requestFocusInWindow();
+//		}
 	}
 
 	public TheDOPOHardestGameGUI getPlayerModePanel() {
 		return playerModePanel;
+	}
+	
+	public void onModeSelected(ModeType mode) {
+		setup.setMode(mode);
+		showMode(PLAYER_CONFIG_MODE);
+	}
+	
+	public void onPlayerConfigConfirmed(PlayerType type, String name) throws IOException, HardestGameException {
+		setup.setPlayer(type, name);
+		startGame(); 
+	}
+	
+	public void startGame() throws IOException, HardestGameException {
+		GameMode gameMode = setup.build();
+		try {
+			TheDOPOHardestGameGUI gamePanel = new TheDOPOHardestGameGUI(gameMode);
+			cardPanel.add(gamePanel, GAME_MODE);
+			showMode(GAME_MODE);
+			gamePanel.startGameThread();
+			gamePanel.requestFocusInWindow();
+
+		} catch(Exception e) {
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(this, "Error al iniciar el juego: " + e.getMessage());
+		}
+		
 	}
 }

@@ -28,6 +28,16 @@ public class Enemy extends Entity {
 		return "/enemy/blue.png";
 	}
 
+	@Override
+	public int getWidth() {
+		return 32;
+	}
+
+	@Override
+	public int getHeight() {
+		return 32;
+	}
+
 	
 
 	
