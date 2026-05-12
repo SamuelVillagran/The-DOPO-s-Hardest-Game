@@ -5,12 +5,10 @@ import java.util.List;
 
 public class Level1 extends Level {
 
-	public Level1(Player py) {
-		int desface = DimensionGame.TILESIZE/2;
+	public Level1() {
 		numCoin = 3;
 		initialize();
 		map = new Map(1);
-		py.setAttributesPlayer(4*DimensionGame.TILESIZEWIDTH-desface, 8*DimensionGame.TILESIZEHEIGHT-desface);
 	}
 
 	@Override
@@ -40,4 +38,16 @@ public class Level1 extends Level {
 		return solids;
 	}
 	
+	public void spawnPlayers(List<Player> pys) {
+		int desface = DimensionGame.TILESIZE/2, sizePys = pys.size();
+		if (sizePys == 1) {
+			pys.get(0).setAttributesPlayer(4*DimensionGame.TILESIZEWIDTH-desface, 8*DimensionGame.TILESIZEHEIGHT-desface);
+		}
+		if (sizePys > 1) {
+			for (Player py : pys) {
+				py.setAttributesPlayer(4*DimensionGame.TILESIZEWIDTH-desface, 8*DimensionGame.TILESIZEHEIGHT-desface);
+			}
+		}
+		
+	}
 }
