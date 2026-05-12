@@ -116,6 +116,11 @@ public class TheDOPOHardestGameGUI extends JPanel implements Runnable {
 			if (timer >= 1000000000) {
 				timer -= 0;
 			}
+			try { // No ahogar la CPU 
+				Thread.sleep(2);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -159,8 +164,8 @@ public class TheDOPOHardestGameGUI extends JPanel implements Runnable {
         BufferedImage img = cachedImages.get("player");
         if (img != null) {
             g2.drawImage(img, game.getPlayer().getPosX(), game.getPlayer().getPosY(),
-                (int)(game.getPlayer().getSize() * DimensionGame.TILESIZEWIDTH),
-                (int)(game.getPlayer().getSize() * DimensionGame.TILESIZEWIDTH), null);
+                (int)(game.getPlayer().getSize() * game.getPlayer().getWidth()),
+                (int)(game.getPlayer().getSize() * game.getPlayer().getHeight()), null);
         }
     }
 

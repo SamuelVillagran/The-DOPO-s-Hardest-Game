@@ -1,6 +1,6 @@
 package domain;
 
-public class Obstacle extends Tile {
+public class Obstacle extends Tile  implements Solid{
 
 	public Obstacle() {
 		posX = 150;
@@ -13,5 +13,15 @@ public class Obstacle extends Tile {
 	
 	public String getPathImage() {
 		return "/"+getNameSuperClass()+"/"+getNameClass()+".png";
+	}
+
+	@Override
+	public int getWidth() {
+		return DimensionGame.TILESIZE;
+	}
+
+	@Override
+	public int getHeight() {
+		return DimensionGame.TILESIZE;
 	}
 }

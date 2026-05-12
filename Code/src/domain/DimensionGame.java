@@ -6,7 +6,7 @@ public class DimensionGame {
 	public static final int MAXWORLDROW = 18;
 	
 	public static final int TILESIZE = 35;
-	public static final int TILESIZEWIDTH = 38;
+	public static final int TILESIZEWIDTH = 35;
 	public static final int TILESIZEHEIGHT = 35;
 	public static int TITTLE_HEIGHT = 70;
 	

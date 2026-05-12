@@ -20,4 +20,14 @@ public class Bomb extends DinamicTile {
 		return null;
 	}
 
+	@Override
+	public int getWidth() {
+		return 15;
+	}
+
+	@Override
+	public int getHeight() {
+		return 15;
+	}
+
 }

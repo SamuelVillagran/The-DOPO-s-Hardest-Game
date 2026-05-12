@@ -20,6 +20,19 @@ public class LifeSource extends DinamicTile {
 		return null;
 	}
 
+
+	@Override
+	public int getWidth() {
+		return 25;
+	}
+
+
+	@Override
+	public int getHeight() {
+		// TODO Auto-generated method stub
+		return 25;
+	}
+
 	
 	
 }

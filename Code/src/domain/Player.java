@@ -1,6 +1,6 @@
 package domain;
 
-public class Player extends Entity implements Collisionable{
+public class Player extends Entity implements HitBox{
 
 	private int countBall;
 	private int deaths;
@@ -166,10 +166,6 @@ public class Player extends Entity implements Collisionable{
 		return getPlayerState().getHeight();
 	}
 	
-	@Override
-	public boolean isSolid() {
-		return true;
-	}
 	
 	public String getName() {
 		return name;
