@@ -8,7 +8,7 @@ public class Green extends PlayerState{
 
 	@Override
 	public int getSpeed() {
-		return 100;
+		return 2;
 	}
 
 	@Override

@@ -5,6 +5,8 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import domain.Element;
+import domain.GameMode;
+import domain.HardestGameException;
 
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
@@ -36,16 +38,17 @@ public class TheDOPOHardestGameGUI extends JPanel implements Runnable {
 	/**
 	 * Inicializate the game panel
 	 * @throws IOException 
+	 * @throws HardestGameException 
 	 */
-	public TheDOPOHardestGameGUI() throws IOException {
-		game = new TheDOPOHardestGame(1);
+	public TheDOPOHardestGameGUI(GameMode gameMode) throws IOException, HardestGameException {
+		game = new TheDOPOHardestGame();
+		game.startGame(gameMode, 1);
+		//game = new TheDOPOHardestGame(1);
 		cachedImages = new HashMap<>();
 		prepareElements();
 		prepareActions();
 	}
 	
-	
-
 	private void prepareActions() {
 		
 		keyH = new KeyHandler() {
@@ -62,13 +65,19 @@ public class TheDOPOHardestGameGUI extends JPanel implements Runnable {
     }
 
     private void loadImages() throws IOException {
-        HashMap<String, String> paths = game.getElementsToDraw();
+    	HashMap<String, String> paths = game.getElementsToDraw();
         for (Entry<String, String> entry : paths.entrySet()) {
+            String path = entry.getValue();
+            InputStream stream = getClass().getResourceAsStream(path);
+            if (stream == null) {
+                System.err.println("loadImages| Recurso no encontrado en classpath " + path);
+                continue;
+            }
             try {
-                BufferedImage img = ImageIO.read(
-                    getClass().getResourceAsStream(entry.getValue()));
+                BufferedImage img = ImageIO.read(stream);
                 cachedImages.put(entry.getKey(), img);
             } catch (IOException e) {
+                System.err.println("loadImages | Error al leer imagen " + path);
                 e.printStackTrace();
             }
         }

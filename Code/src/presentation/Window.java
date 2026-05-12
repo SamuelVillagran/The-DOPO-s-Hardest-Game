@@ -67,7 +67,7 @@ public class Window extends JFrame {
 		setLocationRelativeTo(null);
 		
 		
-		gameContainer.getPlayerModePanel().startGameThread();
+		//gameContainer.getPlayerModePanel().startGameThread();
     }
     
     

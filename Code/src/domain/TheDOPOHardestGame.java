@@ -10,16 +10,30 @@ import java.util.HashSet;
 
 public class TheDOPOHardestGame {
 
-	private static Level currentLevel;
+	private Level currentLevel;
 	private ArrayList<Player> players;
 	private static int numCurrentLevel;
+	private GameMode gameMode;
 	
-	public TheDOPOHardestGame(int numCurrentLevel) { // String filePathMap como parametro
+	
+	public TheDOPOHardestGame(int numCurrentLevel) throws HardestGameException { // String filePathMap como parametro
 		players = new ArrayList<>();
-		players.add(new Player());
+		players.add(new Player(PlayerType.RED, "Raul"));
 		this.currentLevel = new Level1();
 		this.numCurrentLevel = numCurrentLevel;
 	}
+	
+	public TheDOPOHardestGame () {
+		
+	}
+	
+	public void startGame(GameMode gameMode, int numCurrentLevel) throws HardestGameException {
+		this.gameMode = gameMode;
+		this.numCurrentLevel = numCurrentLevel; 
+		this.currentLevel = new Level1();
+		players = new ArrayList<>(gameMode.createPlayers());
+	}
+	
 	
 	
 	

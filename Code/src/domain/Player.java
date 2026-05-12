@@ -4,21 +4,23 @@ public class Player extends Entity implements Collisionable{
 
 	private int countBall;
 	private int deaths;
-	protected PlayerState state;
+	protected String name;
+	//protected PlayerState state;
 	
 	/**
 	 * 
 	 * @param type
 	 * @throws HardestGameException
 	 */
-	public Player(PlayerType type) throws HardestGameException {
+	public Player(PlayerType type, String name) throws HardestGameException {
 		deaths = 0;
 		countBall = 0;
-		//setAttributesPlayer(75, 75, 2, "");
+		setAttributesPlayer(75, 75);
 		this.state = createInitialState(type);
+		this.name = name;
 		//((PlayerState) state).setPlayer(this);
 		size = 0.5f;
-	}
+	} 
 	
 	private PlayerState createInitialState(PlayerType type) throws HardestGameException {
 		switch (type){
@@ -32,7 +34,7 @@ public class Player extends Entity implements Collisionable{
 	public Player(int x, int y) {
 		deaths = 0;
 		countBall = 0;
-		//setAttributesPlayer(x, y, 2, "");
+		setAttributesPlayer(x, y);
 		state = new Red(this);
 		//((PlayerState) state).setPlayer(this);
 		size = 0.5f;
@@ -115,10 +117,9 @@ public class Player extends Entity implements Collisionable{
 		return speed;
 	}
 
-	public void setAttributesPlayer(int x, int y, int speed) {
+	public void setAttributesPlayer(int x, int y) {
 		posX = x;
 		posY = y;
-		this.speed = speed;
 		
 	}
 	
@@ -136,13 +137,13 @@ public class Player extends Entity implements Collisionable{
 	 */
 	public void move(char direction) {
 		switch (direction) {
-			case 'u': posY -= state.getSpeed();
+			case 'u': posY -= getPlayerState().getSpeed();
 				break;
-			case 'd': posY += state.getSpeed();
+			case 'd': posY += getPlayerState().getSpeed();
 				break;
-			case 'l': posX -= state.getSpeed();
+			case 'l': posX -= getPlayerState().getSpeed();
 				break;
-			case 'r': posX += state.getSpeed();
+			case 'r': posX += getPlayerState().getSpeed();
 				break;
 		}
 	}
@@ -152,22 +153,30 @@ public class Player extends Entity implements Collisionable{
 	 * @return
 	 */
 	public boolean isDead() {
-		return state.isDead();
+		return getPlayerState().isDead();
 	}
 	
 	@Override
 	public int getWidth() {
-		return state.getWidth();
+		return getPlayerState().getWidth();
 	}
 	
 	@Override
 	public int getHeight() {
-		return state.getHeight();
+		return getPlayerState().getHeight();
 	}
 	
 	@Override
 	public boolean isSolid() {
 		return true;
+	}
+	
+	public String getName() {
+		return name;
+	}
+	
+	public PlayerState getPlayerState() {
+		return (PlayerState) state;
 	}
 
 }

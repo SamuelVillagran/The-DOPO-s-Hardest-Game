@@ -16,8 +16,12 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import domain.HardestGameException;
+import domain.PlayerType;
 
 public class PlayerConfig extends JPanel{
 	
@@ -28,6 +32,7 @@ public class PlayerConfig extends JPanel{
 	private JComboBox<String> colorCombo;
 	private BufferedImage backgroundImage;
 	private JButton startBtn;
+	private PlayerType selectedType = PlayerType.BLUE;
 	
 	public PlayerConfig(GameContainer container) {
 		loadImage();
@@ -93,9 +98,9 @@ public class PlayerConfig extends JPanel{
 
 		JPanel buttons = new JPanel();
 		buttons.setOpaque(false);
-		buttons.add(colorColumn(Color.BLUE,             "Azul"));
-		buttons.add(colorColumn(Color.RED,              "Rojo"));
-		buttons.add(colorColumn(new Color(30, 160, 30), "Verde"));
+		buttons.add(colorColumn(Color.BLUE,             "Azul", PlayerType.BLUE));
+		buttons.add(colorColumn(Color.RED,              "Rojo", PlayerType.RED));
+		buttons.add(colorColumn(new Color(30, 160, 30), "Verde", PlayerType.GREEN));
 
 		row.add(label,   BorderLayout.NORTH);
 		row.add(buttons, BorderLayout.CENTER);
@@ -142,7 +147,7 @@ public class PlayerConfig extends JPanel{
 		return row;
 	}
 	
-	private JPanel colorColumn(Color color, String labelText) {
+	private JPanel colorColumn(Color color, String labelText, PlayerType type) {
 		JPanel col = new JPanel(new BorderLayout(0, 5));
 		col.setOpaque(false);
 
@@ -160,6 +165,7 @@ public class PlayerConfig extends JPanel{
 
 		col.add(btn, BorderLayout.CENTER);
 		col.add(lbl, BorderLayout.SOUTH);
+		btn.addActionListener(e -> selectedType = type);
 		return col;
 	}
 
@@ -201,6 +207,21 @@ public class PlayerConfig extends JPanel{
 	}
 	
 	private void prepareActionStart(GameContainer container) {
-		startBtn.addActionListener(e -> container.showMode(GameContainer.PLAYER_MODE));
+		startBtn.addActionListener(e -> {
+			String name = nameField.getText();
+			if(name.isEmpty()) {
+				JOptionPane.showMessageDialog(this, "Ingrese un nombre");
+				return;
+			}
+			try {
+				container.onPlayerConfigConfirmed(selectedType, name);
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (HardestGameException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		});
 	}
 }
