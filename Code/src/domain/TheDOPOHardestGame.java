@@ -18,11 +18,19 @@ public class TheDOPOHardestGame {
 	
 	/**
 	 * Constructor class to start game once Window is open.
+	 * @throws HardestGameException 
 	 */
-	public TheDOPOHardestGame () {
+	public TheDOPOHardestGame () throws HardestGameException {
 		cChecker = new CollisionChecker();
+		players = new ArrayList<>();
+		Player py = new Player(PlayerType.RED, "Raul");
+		players.add(py);
+		this.currentLevel = new Level1();
+		this.numCurrentLevel = numCurrentLevel;
+		currentLevel.spawnPlayers(players);
 		
 	}
+
 	
 	/**
 	 * Start the game with a specific characteristics.
@@ -33,11 +41,10 @@ public class TheDOPOHardestGame {
 	 */
 	public void startGame(GameMode gameMode, int numCurrentLevel) throws HardestGameException {
 		this.gameMode = gameMode;
-		this.numCurrentLevel = numCurrentLevel; 
-		players = new ArrayList<>(gameMode.createPlayers());
-		if (gameMode.equals("game")) {
-			this.currentLevel = new Level1(players.get(0));
-		}
+		//players = new ArrayList<>(gameMode.createPlayers());
+		/*if (gameMode.equals("game")) {
+			((Level1) currentLevel).spawnPlayers(players);
+		}*/
 	}
 	
 	/**
@@ -82,22 +89,6 @@ public class TheDOPOHardestGame {
 	 */
 	public int[][] loadMap() {
 		return this.currentLevel.getMapTileNum();
-	}
-	
-	
-	public void createEntitys() {
-		int[][] map = loadMap();
-		int dimCol, dimRow;
-		for (int i=0; i < DimensionGame.MAXWORLDROW; i++) {
-			for (int j=0; j < DimensionGame.MAXWORLDCOL; j++) {
-				if (map[i][j] == 10) {
-					dimRow = i*DimensionGame.TILESIZEHEIGHT;
-					dimCol = i*DimensionGame.TILESIZEWIDTH;
-					Player newPlayer = new Player(dimRow, dimCol);
-					players.add(newPlayer);
-				}
-			}
-		}
 	}
 	
 	/**

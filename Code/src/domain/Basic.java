@@ -1,11 +1,20 @@
 package domain;
 
-public class Basic extends StateEnemy {
+import java.awt.Point;
+import java.util.List;
+
+public class Basic extends Enemy {
 
 	
 	
-	public Basic(Enemy enemy) {
-		this.enemy = enemy;
+	public Basic() {
+		
 	}
 	
+	public Basic(List<Point> movement) {
+		super(movement);
+	}
+	
+	
+
 }

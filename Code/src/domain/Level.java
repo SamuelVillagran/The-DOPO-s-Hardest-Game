@@ -1,6 +1,7 @@
 package domain;
 
 import java.util.HashMap;
+import java.util.List;
 
 public abstract class Level implements CollisionContext{
 
@@ -28,6 +29,7 @@ public abstract class Level implements CollisionContext{
 	}
 	
 	public abstract boolean isCompleted();
+	public abstract void spawnPlayers(List<Player> pys);
 	
 	public HashMap<String, String> getElementsToDraw() {
 		String pathImage = "";
@@ -52,5 +54,6 @@ public abstract class Level implements CollisionContext{
 	public int[][] getMapTileNum() {
 		return map.getMapTileNum();
 	}
+
 	
 }
