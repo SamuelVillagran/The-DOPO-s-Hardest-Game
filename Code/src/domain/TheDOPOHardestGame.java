@@ -14,28 +14,32 @@ public class TheDOPOHardestGame {
 	private ArrayList<Player> players;
 	private static int numCurrentLevel;
 	private GameMode gameMode;
+	private CollisionChecker cChecker;
 	
-
+	
 	/**
-	 * Constructor for main class of domain TheDOPOHardestGame
-	 * @param numCurrentLevel
+	 * Constructor class to start game once Window is open.
 	 */
-	public TheDOPOHardestGame(int numCurrentLevel) throws HardestGameException { // String filePathMap como parametro
+	public TheDOPOHardestGame () {
+		cChecker = new CollisionChecker();
+	}
+	
+	/**
+	 * Start the game with a specific characteristics.
+	 * @param gameMode specific Game Mode it could take values;
+	 * PlayerMode, PlaverVsMachine, PlayerVsPlayer.
+	 * @param numCurrentLevel the actual number level.
+	 * @throws HardestGameException
+	 */
+	public void startGame(GameMode gameMode, int numCurrentLevel) throws HardestGameException {
+		this.gameMode = gameMode;
+		this.numCurrentLevel = numCurrentLevel; 
 		players = new ArrayList<>();
 		Player py = new Player(PlayerType.RED, "Raul");
 		players.add(py);
 		this.currentLevel = new Level1();
 		this.numCurrentLevel = numCurrentLevel;
 		((Level1) currentLevel).spawnPlayers(players);
-	}
-	
-	public void startGame(GameMode gameMode, int numCurrentLevel) throws HardestGameException {
-		this.gameMode = gameMode;
-		this.numCurrentLevel = numCurrentLevel; 
-		//players = new ArrayList<>(gameMode.createPlayers());
-		/*if (gameMode.equals("game")) {
-			((Level1) currentLevel).spawnPlayers(players);
-		}*/
 	}
 	
 	/**

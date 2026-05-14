@@ -28,7 +28,7 @@ public class Level1 extends Level {
 	}
 
 	@Override
-	public List<Solid> getSolidEelements() {
+	public List<Solid> getSolidElements() {
 		List<Solid> solids = new ArrayList<>();
 		for(Element element : elements.values()) {
 			if(element instanceof Solid) {

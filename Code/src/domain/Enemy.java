@@ -5,20 +5,27 @@ import java.util.List;
 
 public class Enemy extends Entity implements Solid {
 
-	private List<Point> movement;
+	protected List<Point> movement;
 	
 	public Enemy() {
 		posX = 210;
 		posY = 210;
 		size = 0.5f;
-		state = (StateEnemy) new Basic(this);
 		speed = 3;
 	}
 	
 	public Enemy(int x, int y) {
 		size = 0.5f;
 		posX = x; posY = y;
-		state = (StateEnemy) new Basic(this);
+	}
+	
+	public Enemy(List<Point> movement) {
+		this.movement = movement;
+		Point firstPoint = movement.get(0);
+		posX = (int) firstPoint.getX();
+		posY = (int) firstPoint.getY();
+		size = 0.5f;
+		speed = 3;
 	}
 	
 	/**

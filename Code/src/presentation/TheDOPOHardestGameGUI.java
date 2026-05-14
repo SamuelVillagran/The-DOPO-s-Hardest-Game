@@ -41,7 +41,7 @@ public class TheDOPOHardestGameGUI extends JPanel implements Runnable {
 	 * @throws HardestGameException 
 	 */
 	public TheDOPOHardestGameGUI(GameMode gameMode) throws IOException, HardestGameException {
-		game = new TheDOPOHardestGame(1);
+		game = new TheDOPOHardestGame();
 		game.startGame(gameMode, 1);
 		//game = new TheDOPOHardestGame(1);
 		cachedImages = new HashMap<>();
@@ -191,28 +191,30 @@ public class TheDOPOHardestGameGUI extends JPanel implements Runnable {
 	 * Load and draw tiles of map to the panel
 	 */
 	private void loadMap(Graphics2D g2) {
-		int col = 0, row = 0, x = 0, y =0;
+		int row = 0, x = 0, y =0;
         int tileNum;
-        int[][] mapTileNum = new int[DimensionGame.MAXWORLDROW][DimensionGame.MAXWORLDCOL];
+        int[][] mapTileNum = game.loadMap(); 
+        Tile[] tiles = game.loadTiles();
         Tile currentTile;
-        while (col < DimensionGame.MAXWORLDCOL && row <  DimensionGame.MAXWORLDROW) {
-        	mapTileNum = game.loadMap();
-        	tileNum = mapTileNum[row][col];
-        	Tile[] tiles = game.loadTiles();
-        	if (tileNum < 9 && tileNum >= 0) {
-	        	currentTile = tiles[tileNum];
-	        	BufferedImage img = cachedImages.get(currentTile.getNameClass());
-	        	g2.drawImage(img, x, y,
-	                    DimensionGame.TILESIZE,
-	                    DimensionGame.TILESIZE, null);
-	        	col++;
-	        	x += DimensionGame.TILESIZE;
+        
+        for (int[] rowMap : mapTileNum) {
+        	for (int col = 0; col < rowMap.length; col++) {
+	        	tileNum = rowMap[col];
 	        	
-	        	if (col == DimensionGame.MAXWORLDCOL) {
-	        		col = 0;
-	        		row++;
-	        		x = 0;
-	        		y += DimensionGame.TILESIZE;
+	        	if (tileNum < 9 && tileNum >= 0) {
+	        		currentTile = tiles[tileNum];
+	        		BufferedImage img = cachedImages.get(currentTile.getNameClass());
+		        	g2.drawImage(img, x, y,
+		                    DimensionGame.TILESIZE,
+		                    DimensionGame.TILESIZE, null);
+		        	
+		        	x += DimensionGame.TILESIZE;
+		        	
+		        	if (col == rowMap.length - 1) {
+		        		row++;
+		        		x = 0;
+		        		y += DimensionGame.TILESIZE;
+		        	}
 	        	}
         	}
         }
