@@ -183,7 +183,7 @@ public class TheDOPOHardestGameGUI extends JPanel implements Runnable {
         }        
 
         // Player encima
-        BufferedImage img = cachedImages.get("player");
+        BufferedImage img = cachedImages.get("player"); //Opcion: dejar players a lo ultimo del arraylist.
         if (img != null) {
 
             g2.drawImage(img, TheDOPOHardestGame.getGame().getPlayer1().getPosX(), TheDOPOHardestGame.getGame().getPlayer1().getPosY(),
