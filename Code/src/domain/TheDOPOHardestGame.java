@@ -15,20 +15,26 @@ public class TheDOPOHardestGame {
 	private static int numCurrentLevel;
 	private GameMode gameMode;
 	private CollisionChecker cChecker;
+	private static TheDOPOHardestGame game;
 	
 	/**
 	 * Constructor class to start game once Window is open.
 	 * @throws HardestGameException 
 	 */
-	public TheDOPOHardestGame () throws HardestGameException {
+	private TheDOPOHardestGame () throws HardestGameException {
 		cChecker = new CollisionChecker();
-		players = new ArrayList<>();
-		Player py = new Player(PlayerType.RED, "Raul");
-		players.add(py);
-		this.currentLevel = new Level1();
-		this.numCurrentLevel = numCurrentLevel;
-		currentLevel.spawnPlayers(players);
-		
+	}
+	
+	/**
+	 * Allow get instance of principal game
+	 * @return The one game instance
+	 * @throws HardestGameException 
+	 */
+	public static TheDOPOHardestGame getGame() throws HardestGameException {
+		if (game == null) {
+			game = new TheDOPOHardestGame();
+		}
+		return game;
 	}
 
 	
@@ -45,6 +51,13 @@ public class TheDOPOHardestGame {
 		/*if (gameMode.equals("game")) {
 			((Level1) currentLevel).spawnPlayers(players);
 		}*/
+		this.numCurrentLevel = numCurrentLevel; 
+		players = new ArrayList<>();
+		Player py = new Player(PlayerType.RED, "Raul");
+		players.add(py);
+		this.currentLevel = new Level1();
+		this.numCurrentLevel = numCurrentLevel;
+		((Level1) currentLevel).spawnPlayers(players);
 	}
 	
 	/**

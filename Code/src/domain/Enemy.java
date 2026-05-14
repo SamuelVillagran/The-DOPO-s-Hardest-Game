@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Enemy extends Entity implements Solid {
 
-	private List<Point> movement;
+	protected List<Point> movement;
 	
 	public Enemy() {
 		posX = 210;
@@ -20,6 +20,7 @@ public class Enemy extends Entity implements Solid {
 	}
 	
 	public Enemy(List<Point> movement) {
+		this.movement = movement;
 		Point firstPoint = movement.get(0);
 		posX = (int) firstPoint.getX();
 		posY = (int) firstPoint.getY();
