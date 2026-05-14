@@ -30,7 +30,6 @@ public class TheDOPOHardestGameGUI extends JPanel implements Runnable {
 
 	private KeyHandler keyH;
 	private Thread gameThread;
-	private TheDOPOHardestGame game;
 	private HashMap<String, BufferedImage> cachedImages;
 	
 	public static final int FPS = 60;
@@ -41,8 +40,7 @@ public class TheDOPOHardestGameGUI extends JPanel implements Runnable {
 	 * @throws HardestGameException 
 	 */
 	public TheDOPOHardestGameGUI(GameMode gameMode) throws IOException, HardestGameException {
-		game = new TheDOPOHardestGame();
-		game.startGame(gameMode, 1);
+		TheDOPOHardestGame.getGame().startGame(gameMode, 1);
 		//game = new TheDOPOHardestGame(1);
 		cachedImages = new HashMap<>();
 		prepareElements();
@@ -68,7 +66,7 @@ public class TheDOPOHardestGameGUI extends JPanel implements Runnable {
 	 * Load the paths of images of objects of game
 	 */
     private void loadImages() throws IOException {
-    	HashMap<String, String> paths = game.getElementsToDraw();
+    	HashMap<String, String> paths = TheDOPOHardestGame.getGame().getElementsToDraw();
         for (Entry<String, String> entry : paths.entrySet()) {
             String path = entry.getValue();
             InputStream stream = getClass().getResourceAsStream(path);
@@ -135,16 +133,16 @@ public class TheDOPOHardestGameGUI extends JPanel implements Runnable {
 	 */
 	private void update() {
 		if (keyH.getUp() == true) {
-			game.movePlayers('u');
+			TheDOPOHardestGame.getGame().movePlayers('u');
 		}
 		if (keyH.getDown() == true) {
-			game.movePlayers('d');
+			TheDOPOHardestGame.getGame().movePlayers('d');
 		}
 		if (keyH.getLeft() == true) {
-			game.movePlayers('l');
+			TheDOPOHardestGame.getGame().movePlayers('l');
 		}
 		if (keyH.getRigth() == true) {
-			game.movePlayers('r');	
+			TheDOPOHardestGame.getGame().movePlayers('r');	
 		}
 	}
 
@@ -161,13 +159,13 @@ public class TheDOPOHardestGameGUI extends JPanel implements Runnable {
 	 * @param g2
 	 */
 	public void draw(Graphics2D g2) {
-        HashMap<Integer, Element> elements = game.getElements();
+        HashMap<Integer, Element> elements = TheDOPOHardestGame.getGame().getElements();
 
         loadMap(g2);
         
         // Dibujar; Tiles, obstáculos, monedas //Ayudado por claude sonnet 4.6 IA a poner el player encima
         for (Element e : elements.values()) {
-            if (game.getPlayer1().equals(e)) continue;
+            if (TheDOPOHardestGame.getGame().getPlayer1().equals(e)) continue;
             BufferedImage img = cachedImages.get(e.getNameClass());
             if (img != null) {
                 g2.drawImage(img, e.getPosX(), e.getPosY(),
@@ -180,9 +178,9 @@ public class TheDOPOHardestGameGUI extends JPanel implements Runnable {
         BufferedImage img = cachedImages.get("player");
         if (img != null) {
 
-            g2.drawImage(img, game.getPlayer1().getPosX(), game.getPlayer1().getPosY(),
-                (int)(game.getPlayer1().getSize() * game.getPlayer1().getWidth()),
-                (int)(game.getPlayer1().getSize() * game.getPlayer1().getHeight()), null);
+            g2.drawImage(img, TheDOPOHardestGame.getGame().getPlayer1().getPosX(), TheDOPOHardestGame.getGame().getPlayer1().getPosY(),
+                (int)(TheDOPOHardestGame.getGame().getPlayer1().getSize() * TheDOPOHardestGame.getGame().getPlayer1().getWidth()),
+                (int)(TheDOPOHardestGame.getGame().getPlayer1().getSize() * TheDOPOHardestGame.getGame().getPlayer1().getHeight()), null);
 
         }
     }
@@ -193,8 +191,8 @@ public class TheDOPOHardestGameGUI extends JPanel implements Runnable {
 	private void loadMap(Graphics2D g2) {
 		int row = 0, x = 0, y =0;
         int tileNum;
-        int[][] mapTileNum = game.loadMap(); 
-        Tile[] tiles = game.loadTiles();
+        int[][] mapTileNum = TheDOPOHardestGame.getGame().loadMap(); 
+        Tile[] tiles = TheDOPOHardestGame.getGame().loadTiles();
         Tile currentTile;
         
         for (int[] rowMap : mapTileNum) {

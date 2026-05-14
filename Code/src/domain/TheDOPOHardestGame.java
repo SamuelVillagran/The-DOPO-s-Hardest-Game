@@ -15,13 +15,24 @@ public class TheDOPOHardestGame {
 	private static int numCurrentLevel;
 	private GameMode gameMode;
 	private CollisionChecker cChecker;
-	
+	private static TheDOPOHardestGame game;
 	
 	/**
 	 * Constructor class to start game once Window is open.
 	 */
-	public TheDOPOHardestGame () {
+	private TheDOPOHardestGame () {
 		cChecker = new CollisionChecker();
+	}
+	
+	/**
+	 * Allow get instance of principal game
+	 * @return The one game instance
+	 */
+	public static TheDOPOHardestGame getGame() {
+		if (game == null) {
+			game = new TheDOPOHardestGame();
+		}
+		return game;
 	}
 	
 	/**
