@@ -10,6 +10,9 @@ public class DimensionGame {
 	public static final int TILESIZEHEIGHT = 35;
 	public static int TITTLE_HEIGHT = 70;
 	
+	public static final int PLAYERSIZEWIDTH = 30;
+	public static final int PLAYERSIZEHEIGHT = 30;
+	
 	public static final int SCREENWIDTH = TILESIZE*MAXWORLDCOL;
 	public static final int SCREENHEIGHT = TILESIZE*MAXWORLDROW;
 

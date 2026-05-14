@@ -7,6 +7,11 @@ public class Obstacle extends Tile  implements Solid{
 		posY = 150;
 	}
 	
+	public Obstacle(int posX, int posY) {
+		this.posX = posX;
+		this.posY = posY;
+	}
+	
 	public String getNameClass() {
 		return this.getClass().getSimpleName().toLowerCase();
 	}

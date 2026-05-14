@@ -167,7 +167,7 @@ public class TheDOPOHardestGameGUI extends JPanel implements Runnable {
         
         // Dibujar; Tiles, obstáculos, monedas //Ayudado por claude sonnet 4.6 IA a poner el player encima
         for (Element e : elements.values()) {
-            if (game.getPlayer1().equals(e)) continue;
+            if (game.getPlayer1().equals(e)) continue; //Verificar
             BufferedImage img = cachedImages.get(e.getNameClass());
             if (img != null) {
                 g2.drawImage(img, e.getPosX(), e.getPosY(),
@@ -177,7 +177,7 @@ public class TheDOPOHardestGameGUI extends JPanel implements Runnable {
         }        
 
         // Player encima
-        BufferedImage img = cachedImages.get("player");
+        BufferedImage img = cachedImages.get("player"); //Opcion: dejar players a lo ultimo del arraylist.
         if (img != null) {
 
             g2.drawImage(img, game.getPlayer1().getPosX(), game.getPlayer1().getPosY(),
