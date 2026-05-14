@@ -1,6 +1,6 @@
 package domain;
 
-public class Bomb extends DinamicTile {
+public class Bomb extends DinamicObject {
 
 	
 	public Bomb(int posX, int posY) {

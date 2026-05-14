@@ -5,6 +5,7 @@ public class Player extends Entity implements HitBox{
 	private int countBall;
 	private int deaths;
 	protected String name;
+	protected int baseSpeed;
 	//protected PlayerState state;
 	
 	/**
@@ -19,6 +20,7 @@ public class Player extends Entity implements HitBox{
 		this.state = createInitialState(type);
 		this.name = name;
 		//((PlayerState) state).setPlayer(this);
+		baseSpeed = 3;
 		size = 0.5f;
 	} 
 	
@@ -166,7 +168,9 @@ public class Player extends Entity implements HitBox{
 		return getPlayerState().getHeight();
 	}
 	
-	
+	public int getBaseSpeed() {
+		return baseSpeed;
+	}
 	public String getName() {
 		return name;
 	}

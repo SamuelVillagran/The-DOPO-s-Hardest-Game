@@ -8,7 +8,7 @@ public class Red extends PlayerState {
 
 	@Override
 	public int getSpeed() {
-		return 2;
+		return py.getBaseSpeed();
 	}
 
 	@Override

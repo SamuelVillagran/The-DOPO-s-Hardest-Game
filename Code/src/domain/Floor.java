@@ -8,16 +8,6 @@ public class Floor extends Tile {
 		posY = 200;
 	}
 	
-	@Override
-	public int getWidth() {
-		return 36;
-	}
-
-	@Override
-	public int getHeight() {
-		return 36;
-	}
-	
 	public String getNameClass() {
 		return this.getClass().getSimpleName().toLowerCase();
 	}

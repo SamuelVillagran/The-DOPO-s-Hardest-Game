@@ -1,6 +1,6 @@
 package domain;
 
-public class Coin extends Colectible {
+public class Coin extends SuperObject {
 
 	public Coin() {
 		posX = 150;

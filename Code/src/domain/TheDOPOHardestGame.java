@@ -111,9 +111,9 @@ public class TheDOPOHardestGame {
 	public Tile[] loadTiles() {
 		Tile[] tiles = new Tile[11];
 		tiles[0] = new Floor();
-		tiles[1] = new Obstacle();
+		tiles[1] = new Wall();
 		tiles[2] = new GreenTile();
-		tiles[3] = new Bomb();
+		//tiles[3] = new Bomb();
 		return tiles;
 	}
 	
