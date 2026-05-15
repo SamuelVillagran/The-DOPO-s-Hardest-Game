@@ -110,10 +110,9 @@ public class TheDOPOHardestGame {
 	 */
 	public Tile[] loadTiles() {
 		Tile[] tiles = new Tile[11];
-		tiles[0] = new Floor();
-		tiles[1] = new Wall();
-		tiles[2] = new GreenTile();
-		//tiles[3] = new Bomb();
+		tiles[0] = new Floor(0, 0);
+		tiles[1] = new Wall(0, 0);
+		tiles[2] = new GreenTile(0, 0);
 		return tiles;
 	}
 	
@@ -123,7 +122,7 @@ public class TheDOPOHardestGame {
 	 */
 	public void movePlayers(char direction) {
 		for (Player py : players) {
-			py.move(direction);
+			py.move(direction, currentLevel, cChecker);
 		}
 	}
 	

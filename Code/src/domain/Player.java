@@ -1,6 +1,6 @@
 package domain;
 
-public class Player extends Entity implements HitBox{
+public class Player extends Entity implements HitBox, Movable{
 
 	private int countBall;
 	private int deaths;
@@ -138,17 +138,44 @@ public class Player extends Entity implements HitBox{
 	 * @param direction direction is where going to move the player
 	 */
 	public void move(char direction) {
+		int speed = getPlayerState().getSpeed();
 		switch (direction) {
-			case 'u': posY -= getPlayerState().getSpeed();
+			case 'u': posY -= speed;
 				break;
-			case 'd': posY += getPlayerState().getSpeed();
+			case 'd': posY += speed;
 				break;
-			case 'l': posX -= getPlayerState().getSpeed();
+			case 'l': posX -= speed;
 				break;
-			case 'r': posX += getPlayerState().getSpeed();
+			case 'r': posX += speed;
 				break;
 		}
 	}
+	
+	public void move(char direction, CollisionContext context, CollisionChecker checker) {
+		int speed = getPlayerState().getSpeed();;
+		
+		int nextX = posX;
+		int nextY = posY;
+		
+		switch (direction) {
+		case 'u': nextY -= speed;
+			break;
+		case 'd': nextY += speed;
+			break;
+		case 'l': nextX -= speed;
+			break;
+		case 'r': nextX += speed;
+			break;
+		default: 
+			return;
+		}
+		
+		if (!checker.canMove(this, nextX, nextY, context)) return;
+		
+		posX = nextX;
+		posY = nextY;
+	}
+	
 	
 	/**
 	 * Check if the player is dead.
