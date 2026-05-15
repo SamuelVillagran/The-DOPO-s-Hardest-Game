@@ -9,8 +9,9 @@ public class Level1 extends Level {
 
 	public Level1() {
 		numCoin = 3;
-		initialize();
 		map = new Map(1);
+		registerTiles();
+		initialize();
 	}
 
 	@Override
@@ -66,6 +67,9 @@ public class Level1 extends Level {
 			for (Player py : pys) {
 				py.setAttributesPlayer(4*DimensionGame.TILESIZEWIDTH-desface, 8*DimensionGame.TILESIZEHEIGHT-desface);
 			}
+		}
+		for(Player py : pys) {
+			elements.put(elements.size() + 1, py);
 		}
 		
 	}
