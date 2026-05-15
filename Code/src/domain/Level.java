@@ -1,12 +1,13 @@
 package domain;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 public abstract class Level implements CollisionContext{
 
 	protected static int numCoin; 
-	protected HashMap<Integer, Element> elements;
+	protected LinkedHashMap<Integer, Element> elements;
 	protected static Map map;
 	
 	/* 
@@ -20,9 +21,7 @@ public abstract class Level implements CollisionContext{
 	 */
 	public Level() {
 		numCoin = 0;
-		elements = new HashMap<>();
-		map = new Map(1);
-		registerTiles();
+		elements = new LinkedHashMap<>();
 	}
 	
 	public abstract void initialize();
@@ -34,10 +33,9 @@ public abstract class Level implements CollisionContext{
 	public abstract void spawnPlayers(List<Player> pys);
 	
 	public HashMap<String, String> getElementsToDraw() {
-		String pathImage = "";
 		HashMap<String, String> pathsElements;
 		
-		pathsElements = new HashMap();
+		pathsElements = new HashMap<String, String>();
 		
 		for (Element e : elements.values()) {
 			String nameClass = e.getNameClass();

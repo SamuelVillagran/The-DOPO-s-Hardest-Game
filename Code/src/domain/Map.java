@@ -40,7 +40,6 @@ public class Map {
 			int col = 0;
 			int row = 0;
 			
-			
 			while (col < DimensionGame.MAXWORLDCOL && row < DimensionGame.MAXWORLDROW) {
 				String line = br.readLine();
 				

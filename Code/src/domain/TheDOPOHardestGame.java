@@ -47,17 +47,11 @@ public class TheDOPOHardestGame {
 	 */
 	public void startGame(GameMode gameMode, int numCurrentLevel) throws HardestGameException {
 		this.gameMode = gameMode;
-		//players = new ArrayList<>(gameMode.createPlayers());
-		/*if (gameMode.equals("game")) {
-			((Level1) currentLevel).spawnPlayers(players);
-		}*/
+		players = new ArrayList<>(gameMode.createPlayers());
 		this.numCurrentLevel = numCurrentLevel; 
-		players = new ArrayList<>();
-		Player py = new Player(PlayerType.RED, "Raul");
-		players.add(py);
 		this.currentLevel = new Level1();
 		this.numCurrentLevel = numCurrentLevel;
-		((Level1) currentLevel).spawnPlayers(players);
+		currentLevel.spawnPlayers(players);
 	}
 	
 	/**
@@ -67,19 +61,19 @@ public class TheDOPOHardestGame {
 	 */
 	public HashMap<String, String> getElementsToDraw() throws IOException{
 		HashMap<String, String> elementsPath = new HashMap();
-		elementsPath = this.currentLevel.getElementsToDraw();
+		elementsPath = currentLevel.getElementsToDraw();
 		
 		//Carga las imagenes de las casillas 
-		Tile[] tiles = loadTiles();
-	    for (Tile t : tiles) {
-	        if (t != null && !elementsPath.containsKey(t.getNameClass())) {
-	            elementsPath.put(t.getNameClass(), t.getPathImage());
-	        }
-	    }
-		
-	    // Carga la imagen del jugador
-		Player py = getPlayer1();
-		elementsPath.put(py.getNameClass(), py.getPathImage());
+//		Tile[] tiles = loadTiles();
+//	    for (Tile t : tiles) {
+//	        if (t != null && !elementsPath.containsKey(t.getNameClass())) {
+//	            elementsPath.put(t.getNameClass(), t.getPathImage());
+//	        }
+//	    }
+//		
+//	    // Carga la imagen del jugador
+//		Player py = getPlayer1();
+//		elementsPath.put(py.getNameClass(), py.getPathImage());
 		return elementsPath;
 	}
 

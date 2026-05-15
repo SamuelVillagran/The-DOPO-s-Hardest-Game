@@ -13,12 +13,12 @@ public class Green extends PlayerState{
 
 	@Override
 	public int getWidth() {
-		return 32;
+		return 30;
 	}
 
 	@Override
 	public int getHeight() {
-		return 32;
+		return 30;
 	}
 
 	@Override
