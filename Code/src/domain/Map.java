@@ -4,16 +4,26 @@ package domain;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 
 public class Map {
 
-	private int[][] mapTileNum;
+	private int[][] mapTileNum; //Datos para presentación.
 	private Figure polygon;
+	private List<Tile> tiles;
+	private TileFactory tileFactory; //Clase creadora de Tiles.
 	
 	public Map(int level) {
+		this(level, new DefaultTileFactory());
+	}
+	
+	public Map(int level ,TileFactory factory) {
 		mapTileNum = new int[DimensionGame.MAXWORLDROW][DimensionGame.MAXWORLDCOL];
+		tiles = new ArrayList<>();
+		this.tileFactory = factory;
 		loadMap(level);
 	}
 	
@@ -40,6 +50,16 @@ public class Map {
 					int num = Integer.parseInt(numbers[col]);
 					
 					mapTileNum[row][col] = num;
+					
+					//Calcula coordenadas en pixeles
+					int posX = col * DimensionGame.TILESIZE;
+                    int posY = row * DimensionGame.TILESIZE;
+                    
+                    //Instancia el tipo de tile correspondiente
+                    Tile tile = tileFactory.createTile(num, posX, posY);
+                    if(tile != null) {
+                    	tiles.add(tile);
+                    }
 					col++;
 				}
 				if (col == DimensionGame.MAXWORLDCOL) {
@@ -55,6 +75,9 @@ public class Map {
 		return mapTileNum;
 	}
 	
+	public List<Tile> getTiles(){
+		return tiles;
+	}
 	public int[][] getMapTileNum() {
 		return mapTileNum;
 	}

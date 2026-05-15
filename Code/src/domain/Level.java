@@ -21,6 +21,8 @@ public abstract class Level implements CollisionContext{
 	public Level() {
 		numCoin = 0;
 		elements = new HashMap<>();
+		map = new Map(1);
+		registerTiles();
 	}
 	
 	public abstract void initialize();
@@ -53,6 +55,12 @@ public abstract class Level implements CollisionContext{
 
 	public int[][] getMapTileNum() {
 		return map.getMapTileNum();
+	}
+	
+	protected void registerTiles() {
+		for(Tile tile : map.getTiles()) {
+			elements.put(elements.size() +1, tile);
+		}
 	}
 
 	
