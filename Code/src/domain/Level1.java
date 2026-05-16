@@ -53,6 +53,17 @@ public class Level1 extends Level {
 		return solids;
 	}
 	
+	@Override 
+	public List<Interactable> getInteractableElements(){
+		List<Interactable> interactable = new ArrayList<>();
+		for(Element element : elements.values()) {
+			if(element instanceof Interactable) {
+				interactable.add((Interactable)element);
+			}
+		}
+		return interactable;
+	}
+	
 	/**
 	 * Put at the correct position the players of level1
 	 * @param pys pys are the list of players that are at the level

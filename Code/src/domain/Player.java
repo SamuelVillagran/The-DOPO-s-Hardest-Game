@@ -1,12 +1,12 @@
 package domain;
 
-public class Player extends Entity implements HitBox, Movable{
+public abstract class Player extends Entity implements HitBox, Movable{
 
-	private int countBall;
+	private int countCoins;
 	private int deaths;
+	private int lifes;
 	protected String name;
 	protected int baseSpeed;
-	//protected PlayerState state;
 	
 	/**
 	 * 
@@ -15,7 +15,7 @@ public class Player extends Entity implements HitBox, Movable{
 	 */
 	public Player(PlayerType type, String name) throws HardestGameException {
 		deaths = 0;
-		countBall = 0;
+		countCoins = 0;
 		setAttributesPlayer(75, 75);
 		this.state = createInitialState(type);
 		this.name = name;
@@ -35,7 +35,7 @@ public class Player extends Entity implements HitBox, Movable{
 	
 	public Player(int x, int y) {
 		deaths = 0;
-		countBall = 0;
+		countCoins = 0;
 		setAttributesPlayer(x, y);
 		state = new Red(this);
 		//((PlayerState) state).setPlayer(this);
@@ -204,6 +204,22 @@ public class Player extends Entity implements HitBox, Movable{
 	
 	public PlayerState getPlayerState() {
 		return (PlayerState) state;
+	}
+	
+	public void onEnemyContact() {
+		getPlayerState().onEnemyContact();
+	}
+
+	public void addCoin(Coin coin) {
+		countCoins ++;
+	}
+
+	public void destroy() {
+		setState(new DeadState(this));
+	}
+
+	public void addLife() {
+		lifes++;
 	}
 
 }
