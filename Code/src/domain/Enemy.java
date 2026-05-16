@@ -3,7 +3,7 @@ package domain;
 import java.awt.Point;
 import java.util.List;
 
-public abstract class Enemy extends Entity implements Solid {
+public abstract class Enemy extends Entity {
 
 	protected List<Point> movement;
 	protected char direction;
