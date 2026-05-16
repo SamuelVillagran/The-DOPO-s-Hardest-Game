@@ -1,8 +1,8 @@
 package domain;
 
-public class Obstacle extends Tile  implements Solid{
+public class Wall extends Tile  implements Solid{
 
-	public Obstacle() {
+	public Wall() {
 		posX = 150;
 		posY = 150;
 	}

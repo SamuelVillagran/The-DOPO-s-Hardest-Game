@@ -40,8 +40,10 @@ public class Level1 extends Level {
 	
 	public void spawnPlayers(List<Player> pys) {
 		int desface = DimensionGame.TILESIZE/4, sizePys = pys.size();
+		Player firstPy = null;
 		if (sizePys == 1) {
-			pys.get(0).setAttributesPlayer(4*DimensionGame.TILESIZEWIDTH-desface, 8*DimensionGame.TILESIZEHEIGHT-desface);
+			firstPy = pys.get(0);
+			firstPy.setAttributesPlayer(4*DimensionGame.TILESIZEWIDTH-desface, 8*DimensionGame.TILESIZEHEIGHT-desface);
 		}
 		if (sizePys > 1) {
 			for (Player py : pys) {

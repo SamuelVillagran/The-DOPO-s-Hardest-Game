@@ -59,13 +59,14 @@ public class TheDOPOHardestGame {
 	 * @throws IOException
 	 */
 	public HashMap<String, String> getElementsToDraw() throws IOException{
-		HashMap<String, String> elementsPath = new HashMap();
-		elementsPath = this.currentLevel.getElementsToDraw();
+		HashMap<String, String> elementsPath = this.currentLevel.getElementsToDraw();
 		
 		//Carga las imagenes de las casillas 
 		Tile[] tiles = loadTiles();
+		boolean isPathAtPaths = false;
 	    for (Tile t : tiles) {
-	        if (t != null && !elementsPath.containsKey(t.getNameClass())) {
+	    	isPathAtPaths = elementsPath.containsKey(t.getNameClass());
+	        if (t != null && !isPathAtPaths) {
 	            elementsPath.put(t.getNameClass(), t.getPathImage());
 	        }
 	    }
@@ -104,7 +105,7 @@ public class TheDOPOHardestGame {
 	public Tile[] loadTiles() {
 		Tile[] tiles = new Tile[11];
 		tiles[0] = new Floor();
-		tiles[1] = new Obstacle();
+		tiles[1] = new Wall();
 		tiles[2] = new GreenTile();
 		tiles[3] = new Bomb();
 		return tiles;

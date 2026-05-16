@@ -23,6 +23,7 @@ public abstract class Level implements CollisionContext{
 	}
 	
 	public abstract void initialize();
+	
 	public HashMap<Integer, Element> getElements() {
 		return elements;
 	}
@@ -34,19 +35,17 @@ public abstract class Level implements CollisionContext{
 		HashMap<String, String> pathsElements;
 		
 		pathsElements = new HashMap();
-		
+		boolean containKey = false;
+		String nameClass;
 		for (Element e : elements.values()) {
-			String nameClass = e.getNameClass();
-			if (!pathsElements.containsKey(nameClass)) {
+			nameClass = e.getNameClass();
+			containKey = pathsElements.containsKey(nameClass);
+			if (!containKey) {
 				pathsElements.put(nameClass, e.getPathImage());
 			}
 		}
 		return pathsElements;
 		
-	}
-
-	public int[][] loadMap() {
-		return map.getMapTileNum();
 	}
 
 	public int[][] getMapTileNum() {
