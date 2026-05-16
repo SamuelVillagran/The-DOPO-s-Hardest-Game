@@ -131,5 +131,11 @@ public class TheDOPOHardestGame {
 	public List<Enemy> getEnemies() {
 		return currentLevel.getEnemies();
 	}
+
+	public void update() {
+		for (Enemy e : getEnemies()) {
+			e.move();
+		}
+	}
 	
 }

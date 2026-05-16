@@ -150,11 +150,7 @@ public class TheDOPOHardestGameGUI extends JPanel implements Runnable {
 		if (keyH.getRigth() == true) {
 			TheDOPOHardestGame.getGame().movePlayers('r');	
 		}
-		
-		for (Enemy e : TheDOPOHardestGame.getGame().getEnemies()) {
-			e.move();
-		}
-	
+		TheDOPOHardestGame.getGame().update();
 	}
 
 	/**

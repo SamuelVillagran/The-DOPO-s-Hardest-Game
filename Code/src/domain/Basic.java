@@ -11,11 +11,6 @@ public class Basic extends Enemy {
 	public Basic(List<Point> movement) {
 		super(movement);
 	}
-	
-	public Basic(List<Point> movement, CollisionChecker cCheker) {
-		super(movement);
-		this.cCheker = cCheker;
-	}
 
 	public Basic(List<Point> movement, CollisionChecker cCheker, CollisionContext context) {
 		super(movement);
@@ -53,12 +48,7 @@ public class Basic extends Enemy {
 	public void move() { 
 		int nextX = posX;
 	    int nextY = posY;
-	    switch (direction) {
-	        case 'u' -> nextY -= speed;
-	        case 'd' -> nextY += speed;
-	        case 'l' -> nextX -= speed;
-	        case 'r' -> nextX += speed;
-	    }
+	   
 		if (!cCheker.canMove(this, nextX, nextY, context)) {
 			if (direction == 'r' || direction == 'l') {
 				direction = (direction == 'r') ? 'l' : 'r';
@@ -66,8 +56,7 @@ public class Basic extends Enemy {
 			if (direction == 'u' || direction == 'd') {
 				direction = (direction == 'u') ? 'd' : 'u';
 			}
-		} else {
-			super.move(direction);
 		}
+		super.move(direction);
 	}
 }
