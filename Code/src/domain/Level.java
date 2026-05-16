@@ -1,12 +1,18 @@
 package domain;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.TreeMap;
+import java.util.TreeSet;
+import java.util.stream.Collectors;
 
 public abstract class Level implements CollisionContext{
 
 	protected static int numCoin; 
-	protected HashMap<Integer, Element> elements;
+	protected LinkedHashMap<Integer, Element> elements;
 	protected static Map map;
+	protected CollisionChecker cCheker;
 	
 	/* 
 	 * elements = new HashMap<>();
@@ -19,7 +25,7 @@ public abstract class Level implements CollisionContext{
 	 */
 	public Level() {
 		numCoin = 0;
-		elements = new HashMap<>();
+		elements = new LinkedHashMap<>();
 	}
 	
 	public abstract void initialize();
@@ -29,11 +35,10 @@ public abstract class Level implements CollisionContext{
 	}
 	
 	public abstract boolean isCompleted();
+	public abstract void spawnPlayers(List<Player> pys);
 	
 	public HashMap<String, String> getElementsToDraw() {
-		String pathImage = "";
 		HashMap<String, String> pathsElements;
-		
 		pathsElements = new HashMap();
 		boolean containKey = false;
 		String nameClass;
@@ -45,11 +50,24 @@ public abstract class Level implements CollisionContext{
 			}
 		}
 		return pathsElements;
-		
 	}
 
 	public int[][] getMapTileNum() {
 		return map.getMapTileNum();
 	}
+	
+	protected void registerTiles() {
+		for(Tile tile : map.getTiles()) {
+			elements.put(elements.size() +1, tile);
+		}
+	}
+
+	protected List<Enemy> getEnemies() {
+		return elements.values().stream()
+	            .filter(e -> e instanceof Enemy)
+	            .map(e -> (Enemy) e)
+	            .toList();
+	}
+
 	
 }

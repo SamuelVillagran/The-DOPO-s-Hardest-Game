@@ -17,17 +17,5 @@ public abstract class Zone {
 	public Zone(List<Point> coordinatesTiles, String typeZone) {
 		bounds = new Figure(coordinatesTiles);
 		tiles = new LinkedList<>();
-		switch (typeZone) {
-			case "lifesourse":
-				for (Point p : coordinatesTiles) {
-					tiles.add(new LifeSource((int) p.getX(), (int) p.getY())); 
-				}
-				break;
-			case "bomb":
-				for (Point p : coordinatesTiles) {
-					tiles.add(new Bomb((int) p.getX(), (int) p.getY()));
-				}
-				break;
-		}
 	}
 }

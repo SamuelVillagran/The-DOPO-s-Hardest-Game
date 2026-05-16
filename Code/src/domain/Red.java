@@ -8,17 +8,17 @@ public class Red extends PlayerState {
 
 	@Override
 	public int getSpeed() {
-		return 2;
+		return py.getBaseSpeed();
 	}
 
 	@Override
 	public int getWidth() {
-		return 36;
+		return 30;
 	}
 
 	@Override
 	public int getHeight() {
-		return 36;
+		return 30;
 	}
 
 	@Override

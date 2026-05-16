@@ -19,6 +19,7 @@ import javax.swing.JPanel;
 
 import domain.DimensionGame;
 import domain.Element;
+import domain.Enemy;
 import domain.GameMode;
 import domain.HardestGameException;
 import domain.TheDOPOHardestGame;
@@ -40,8 +41,8 @@ public class TheDOPOHardestGameGUI extends JPanel implements Runnable {
 	 * @throws HardestGameException 
 	 */
 	public TheDOPOHardestGameGUI(GameMode gameMode) throws IOException, HardestGameException {
+		
 		TheDOPOHardestGame.getGame().startGame(gameMode, 1);
-		//game = new TheDOPOHardestGame(1);
 		cachedImages = new HashMap<>();
 		prepareElements();
 		prepareActions();
@@ -57,7 +58,7 @@ public class TheDOPOHardestGameGUI extends JPanel implements Runnable {
 		this.addKeyListener(keyH);
 	}
 
-	private void prepareElements() throws IOException {
+	private void prepareElements() throws IOException, HardestGameException {
 		setScreen();
 		loadImages(); // <-- cargar una sola vez
     }
@@ -65,7 +66,7 @@ public class TheDOPOHardestGameGUI extends JPanel implements Runnable {
 	/*
 	 * Load the paths of images of objects of game
 	 */
-    private void loadImages() throws IOException {
+    private void loadImages() throws IOException, HardestGameException {
     	HashMap<String, String> paths = TheDOPOHardestGame.getGame().getElementsToDraw();
         for (Entry<String, String> entry : paths.entrySet()) {
             String path = entry.getValue();
@@ -111,7 +112,11 @@ public class TheDOPOHardestGameGUI extends JPanel implements Runnable {
 			lastTime = currentTime;
 			if (delta >= 1) {
 				// 1. UPDATE: 
-				update();
+				try {
+					update();
+				} catch (HardestGameException e) {
+					e.printStackTrace();
+				}
 				// 2. DRAW:
 				repaint();
 				delta--;
@@ -130,8 +135,9 @@ public class TheDOPOHardestGameGUI extends JPanel implements Runnable {
 
 	/**
 	 * Make the interaction of keyboard with the player
+	 * @throws HardestGameException 
 	 */
-	private void update() {
+	private void update() throws HardestGameException {
 		if (keyH.getUp() == true) {
 			TheDOPOHardestGame.getGame().movePlayers('u');
 		}
@@ -144,6 +150,7 @@ public class TheDOPOHardestGameGUI extends JPanel implements Runnable {
 		if (keyH.getRigth() == true) {
 			TheDOPOHardestGame.getGame().movePlayers('r');	
 		}
+		TheDOPOHardestGame.getGame().update();
 	}
 
 	/**
@@ -157,66 +164,22 @@ public class TheDOPOHardestGameGUI extends JPanel implements Runnable {
 	/**
 	 * Draw at a panel g2 different entitys
 	 * @param g2
+	 * @throws HardestGameException 
 	 */
-	public void draw(Graphics2D g2) {
+	public void draw(Graphics2D g2) throws HardestGameException {
         HashMap<Integer, Element> elements = TheDOPOHardestGame.getGame().getElements();
 
-        loadMap(g2);
-        
         // Dibujar; Tiles, obstáculos, monedas //Ayudado por claude sonnet 4.6 IA a poner el player encima
         for (Element e : elements.values()) {
-            if (TheDOPOHardestGame.getGame().getPlayer1().equals(e)) continue;
             BufferedImage img = cachedImages.get(e.getNameClass());
             if (img != null) {
                 g2.drawImage(img, e.getPosX(), e.getPosY(),
-                    (int)(e.getSize() * DimensionGame.TILESIZEWIDTH),
-                    (int)(e.getSize() * DimensionGame.TILESIZEWIDTH), null);
+                    (int)(e.getWidth()),
+                    (int)(e.getHeight()), 
+                    null);
             }
-        }        
-
-        // Player encima
-        BufferedImage img = cachedImages.get("player");
-        if (img != null) {
-
-            g2.drawImage(img, TheDOPOHardestGame.getGame().getPlayer1().getPosX(), TheDOPOHardestGame.getGame().getPlayer1().getPosY(),
-                (int)(TheDOPOHardestGame.getGame().getPlayer1().getSize() * TheDOPOHardestGame.getGame().getPlayer1().getWidth()),
-                (int)(TheDOPOHardestGame.getGame().getPlayer1().getSize() * TheDOPOHardestGame.getGame().getPlayer1().getHeight()), null);
-
         }
     }
-
-	/*
-	 * Load and draw tiles of map to the panel
-	 */
-	private void loadMap(Graphics2D g2) {
-		int row = 0, x = 0, y =0;
-        int tileNum;
-        int[][] mapTileNum = TheDOPOHardestGame.getGame().loadMap(); 
-        Tile[] tiles = TheDOPOHardestGame.getGame().loadTiles();
-        Tile currentTile;
-        
-        for (int[] rowMap : mapTileNum) {
-        	for (int col = 0; col < rowMap.length; col++) {
-	        	tileNum = rowMap[col];
-	        	
-	        	if (tileNum < 9 && tileNum >= 0) {
-	        		currentTile = tiles[tileNum];
-	        		BufferedImage img = cachedImages.get(currentTile.getNameClass());
-		        	g2.drawImage(img, x, y,
-		                    DimensionGame.TILESIZE,
-		                    DimensionGame.TILESIZE, null);
-		        	
-		        	x += DimensionGame.TILESIZE;
-		        	
-		        	if (col == rowMap.length - 1) {
-		        		row++;
-		        		x = 0;
-		        		y += DimensionGame.TILESIZE;
-		        	}
-	        	}
-        	}
-        }
-	}
 	
 	/**
 	 * Paint components at the graphic
@@ -225,7 +188,12 @@ public class TheDOPOHardestGameGUI extends JPanel implements Runnable {
 	protected void paintComponent(Graphics g) {
 	    super.paintComponent(g);
 	    Graphics2D g2 = (Graphics2D) g;
-	    draw(g2);
+	    try {
+			draw(g2);
+		} catch (HardestGameException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	    g2.dispose();
 	}
 	

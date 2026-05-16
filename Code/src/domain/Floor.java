@@ -3,9 +3,9 @@ package domain;
 public class Floor extends Tile {
 
 	
-	public Floor() {
-		posX = 200;
-		posY = 200;
+	public Floor(int posX, int posY) {
+		this.posX = posX;
+		this.posY = posY;
 	}
 	
 	public String getNameClass() {
@@ -19,15 +19,4 @@ public class Floor extends Tile {
 	public String getPathImage() {
 		return "/"+getNameSuperClass()+"/"+getNameClass()+".png";		
 	}
-
-	@Override
-	public int getWidth() {
-		return DimensionGame.TILESIZE;
-	}
-
-	@Override
-	public int getHeight() {
-		return DimensionGame.TILESIZE;
-	}
-
 }

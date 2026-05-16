@@ -7,21 +7,16 @@ public class Wall extends Tile  implements Solid{
 		posY = 150;
 	}
 	
+	public Wall(int posX, int posY) {
+		this.posX = posX;
+		this.posY = posY;
+	}
+	
 	public String getNameClass() {
 		return this.getClass().getSimpleName().toLowerCase();
 	}
 	
 	public String getPathImage() {
 		return "/"+getNameSuperClass()+"/"+getNameClass()+".png";
-	}
-
-	@Override
-	public int getWidth() {
-		return DimensionGame.TILESIZE;
-	}
-
-	@Override
-	public int getHeight() {
-		return DimensionGame.TILESIZE;
 	}
 }

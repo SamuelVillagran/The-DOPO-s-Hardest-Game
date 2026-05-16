@@ -7,6 +7,9 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
+import java.util.TreeMap;
+import java.util.TreeSet;
 
 public class TheDOPOHardestGame {
 
@@ -19,21 +22,24 @@ public class TheDOPOHardestGame {
 	
 	/**
 	 * Constructor class to start game once Window is open.
+	 * @throws HardestGameException 
 	 */
-	private TheDOPOHardestGame () {
+	private TheDOPOHardestGame () throws HardestGameException {
 		cChecker = new CollisionChecker();
 	}
 	
 	/**
 	 * Allow get instance of principal game
 	 * @return The one game instance
+	 * @throws HardestGameException 
 	 */
-	public static TheDOPOHardestGame getGame() {
+	public static TheDOPOHardestGame getGame() throws HardestGameException {
 		if (game == null) {
 			game = new TheDOPOHardestGame();
 		}
 		return game;
 	}
+
 	
 	/**
 	 * Start the game with a specific characteristics.
@@ -44,13 +50,11 @@ public class TheDOPOHardestGame {
 	 */
 	public void startGame(GameMode gameMode, int numCurrentLevel) throws HardestGameException {
 		this.gameMode = gameMode;
+		players = new ArrayList<>(gameMode.createPlayers());
 		this.numCurrentLevel = numCurrentLevel; 
-		players = new ArrayList<>();
-		Player py = new Player(PlayerType.RED, "Raul");
-		players.add(py);
-		this.currentLevel = new Level1();
+		this.currentLevel = new Level1(cChecker);
 		this.numCurrentLevel = numCurrentLevel;
-		((Level1) currentLevel).spawnPlayers(players);
+		currentLevel.spawnPlayers(players);
 	}
 	
 	/**
@@ -59,6 +63,7 @@ public class TheDOPOHardestGame {
 	 * @throws IOException
 	 */
 	public HashMap<String, String> getElementsToDraw() throws IOException{
+<<<<<<< HEAD
 		HashMap<String, String> elementsPath = this.currentLevel.getElementsToDraw();
 		
 		//Carga las imagenes de las casillas 
@@ -74,6 +79,22 @@ public class TheDOPOHardestGame {
 	    // Carga la imagen del jugador
 		Player py = getPlayer1();
 		elementsPath.put(py.getNameClass(), py.getPathImage());
+=======
+		HashMap<String, String> elementsPath = new HashMap();
+		elementsPath = currentLevel.getElementsToDraw();
+		
+		//Carga las imagenes de las casillas 
+//		Tile[] tiles = loadTiles();
+//	    for (Tile t : tiles) {
+//	        if (t != null && !elementsPath.containsKey(t.getNameClass())) {
+//	            elementsPath.put(t.getNameClass(), t.getPathImage());
+//	        }
+//	    }
+//		
+//	    // Carga la imagen del jugador
+//		Player py = getPlayer1();
+//		elementsPath.put(py.getNameClass(), py.getPathImage());
+>>>>>>> development
 		return elementsPath;
 	}
 
@@ -104,10 +125,16 @@ public class TheDOPOHardestGame {
 	 */
 	public Tile[] loadTiles() {
 		Tile[] tiles = new Tile[11];
+<<<<<<< HEAD
 		tiles[0] = new Floor();
 		tiles[1] = new Wall();
 		tiles[2] = new GreenTile();
 		tiles[3] = new Bomb();
+=======
+		tiles[0] = new Floor(0, 0);
+		tiles[1] = new Wall(0, 0);
+		tiles[2] = new GreenTile(0, 0);
+>>>>>>> development
 		return tiles;
 	}
 	
@@ -117,13 +144,23 @@ public class TheDOPOHardestGame {
 	 */
 	public void movePlayers(char direction) {
 		for (Player py : players) {
-			py.move(direction);
+			py.move(direction, currentLevel, cChecker);
 		}
 	}
 	
 	
 	public void setCurrentLevel(int numLevel) {
 		numCurrentLevel = numLevel;
+	}
+	
+	public List<Enemy> getEnemies() {
+		return currentLevel.getEnemies();
+	}
+
+	public void update() {
+		for (Enemy e : getEnemies()) {
+			e.move();
+		}
 	}
 	
 }

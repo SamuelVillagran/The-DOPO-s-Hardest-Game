@@ -8,17 +8,17 @@ public class SlowedState extends PlayerState{
 
 	@Override
 	public int getSpeed() {
-		return 1;
+		return (int) (py.getBaseSpeed() * 0.7f);
 	}
 
 	@Override
 	public int getWidth() {
-		return 32;
+		return 30;
 	}
 
 	@Override
 	public int getHeight() {
-		return 32;
+		return 30;
 	}
 
 	@Override

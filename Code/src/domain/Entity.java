@@ -5,7 +5,6 @@ public abstract class Entity extends Element {
 	protected int speed;
 	protected StateEntity state;
 	
-	public abstract void move(char direction);
 	
 	public String getNameClass() {
 		return this.getClass().getSimpleName().toLowerCase();

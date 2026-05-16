@@ -1,6 +1,6 @@
 package domain;
 
-public abstract class DinamicTile extends Tile {
+public abstract class DinamicObject extends SuperObject {
 
 	private boolean isActive;
 	

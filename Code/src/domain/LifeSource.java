@@ -1,6 +1,6 @@
 package domain;
 
-public class LifeSource extends DinamicTile {
+public class LifeSource extends DinamicObject {
 
 	public LifeSource(int posX, int posY) {
 		this.posX = posX;
