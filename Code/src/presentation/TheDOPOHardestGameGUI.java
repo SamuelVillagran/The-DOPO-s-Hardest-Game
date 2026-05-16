@@ -19,6 +19,7 @@ import javax.swing.JPanel;
 
 import domain.DimensionGame;
 import domain.Element;
+import domain.Enemy;
 import domain.GameMode;
 import domain.HardestGameException;
 import domain.TheDOPOHardestGame;
@@ -114,7 +115,6 @@ public class TheDOPOHardestGameGUI extends JPanel implements Runnable {
 				try {
 					update();
 				} catch (HardestGameException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				// 2. DRAW:
@@ -150,6 +150,11 @@ public class TheDOPOHardestGameGUI extends JPanel implements Runnable {
 		if (keyH.getRigth() == true) {
 			TheDOPOHardestGame.getGame().movePlayers('r');	
 		}
+		
+		for (Enemy e : TheDOPOHardestGame.getGame().getEnemies()) {
+			e.move();
+		}
+	
 	}
 
 	/**
@@ -174,11 +179,11 @@ public class TheDOPOHardestGameGUI extends JPanel implements Runnable {
             if (img != null) {
                 g2.drawImage(img, e.getPosX(), e.getPosY(),
                     (int)(e.getWidth()),
-                    (int)(e.getHeight()), null);
+                    (int)(e.getHeight()), 
+                    null);
             }
-        }        
+        }
     }
-	
 	
 	/**
 	 * Paint components at the graphic

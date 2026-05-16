@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.TreeMap;
+import java.util.TreeSet;
+import java.util.stream.Collectors;
 
 public abstract class Level implements CollisionContext{
 	protected static int numCoin; 
@@ -38,7 +41,6 @@ public abstract class Level implements CollisionContext{
 		HashMap<String, String> pathsElements;
 		
 		pathsElements = new HashMap<String, String>();
-		
 		for (Element e : elements.values()) {
 			String nameClass = e.getNameClass();
 			if (!pathsElements.containsKey(nameClass)) {
@@ -46,7 +48,6 @@ public abstract class Level implements CollisionContext{
 			}
 		}
 		return pathsElements;
-		
 	}
 
 	public int[][] loadMap() {
@@ -75,6 +76,13 @@ public abstract class Level implements CollisionContext{
 		for(Player player : players) {
 			checker.checkContactsWithInteractable(player, this, this);
 		}
+	}
+
+	protected List<Enemy> getEnemies() {
+		return elements.values().stream()
+	            .filter(e -> e instanceof Enemy)
+	            .map(e -> (Enemy) e)
+	            .toList();
 	}
 
 	

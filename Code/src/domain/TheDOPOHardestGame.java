@@ -7,6 +7,9 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
+import java.util.TreeMap;
+import java.util.TreeSet;
 
 public class TheDOPOHardestGame {
 
@@ -49,7 +52,7 @@ public class TheDOPOHardestGame {
 		this.gameMode = gameMode;
 		players = new ArrayList<>(gameMode.createPlayers());
 		this.numCurrentLevel = numCurrentLevel; 
-		this.currentLevel = new Level1();
+		this.currentLevel = new Level1(cChecker);
 		this.numCurrentLevel = numCurrentLevel;
 		currentLevel.spawnPlayers(players);
 		currentLevel.setPlayers(players);
@@ -124,6 +127,10 @@ public class TheDOPOHardestGame {
 	
 	public void setCurrentLevel(int numLevel) {
 		numCurrentLevel = numLevel;
+	}
+	
+	public List<Enemy> getEnemies() {
+		return currentLevel.getEnemies();
 	}
 	
 }
