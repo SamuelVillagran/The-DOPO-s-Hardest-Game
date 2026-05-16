@@ -39,7 +39,6 @@ public class TheDOPOHardestGame {
 		}
 		return game;
 	}
-
 	
 	/**
 	 * Start the game with a specific characteristics.
@@ -110,7 +109,6 @@ public class TheDOPOHardestGame {
 		}
 	}
 	
-	
 	public void setCurrentLevel(int numLevel) {
 		numCurrentLevel = numLevel;
 	}
@@ -124,5 +122,4 @@ public class TheDOPOHardestGame {
 			e.move();
 		}
 	}
-	
 }
