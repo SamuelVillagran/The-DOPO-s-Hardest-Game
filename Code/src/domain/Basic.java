@@ -19,6 +19,7 @@ public class Basic extends Enemy {
 
 	public Basic(List<Point> movement, CollisionChecker cCheker, CollisionContext context) {
 		super(movement);
+		speed = 5;
 		this.cCheker = cCheker;
 		this.context = context;
 		int dx2 = 0, dy2 = 0;
@@ -29,46 +30,44 @@ public class Basic extends Enemy {
 		int px2 = (int) point2.getX();
 		int py2 = (int) point2.getY();
 		dx2 = (posX - px2); 
-		dy2 = (posY - py2); 
-		
-		if (posX == px1) {
-			if (dx2 > 0) {
-				direction = 'r';
-			} else if (dx2 < 0) {
-				direction = 'l';
-			}
+		dy2 = (posY - py2); // Las condicionales y código de para abajo fue perfeccionado con Gemini IA 2026
+		// 1. Si las Y son iguales, el camino es horizontal (Izquierda a Derecha)
+		if (py1 == py2) {
+		    if (px1 < px2) {
+		        direction = 'r'; // Va a la derecha
+		    } else {
+		        direction = 'l'; // Va a la izquierda
+		    }
 		}
-		if (posY == py1) {
-			if (dy2 > 0) {
-				direction = 'd';
-			} else if (dy2 < 0) {
-				direction = 'u';
-			}
+
+		// 2. Si las X son iguales, el camino es vertical (Arriba a Abajo)
+		if (px1 == px2) {
+		    if (py1 < py2) {
+		        direction = 'd'; // Va hacia abajo
+		    } else {
+		        direction = 'u'; // Va hacia arriba
+		    }
 		}
 	}
 
 	public void move() { 
-		
-		super.move(direction);
-		
-		int nextX = posX + speed;
-        int nextY = posY + speed;
-        
-		int x = 0, y = 0;
-		
+		int nextX = posX;
+	    int nextY = posY;
+	    switch (direction) {
+	        case 'u' -> nextY -= speed;
+	        case 'd' -> nextY += speed;
+	        case 'l' -> nextX -= speed;
+	        case 'r' -> nextX += speed;
+	    }
 		if (!cCheker.canMove(this, nextX, nextY, context)) {
 			if (direction == 'r' || direction == 'l') {
-				switch (direction) {
-					case 'l' -> direction = 'r';
-					case 'r' -> direction = 'l';
-				}
+				direction = (direction == 'r') ? 'l' : 'r';
 			}
 			if (direction == 'u' || direction == 'd') {
-				switch (direction) {
-					case 'u' -> direction = 'd';
-					case 'd' -> direction = 'u';
-				}
+				direction = (direction == 'u') ? 'd' : 'u';
 			}
+		} else {
+			super.move(direction);
 		}
 	}
 }

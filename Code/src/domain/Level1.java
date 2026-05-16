@@ -12,45 +12,54 @@ public class Level1 extends Level {
 		map = new Map(1);
 		registerTiles();
 		initialize();
+		
 	}
 	
 	public Level1(CollisionChecker cCheker) {
 		numCoin = 3;
-		map = new Map(1);
-		registerTiles();
-		this.cCheker = cCheker;
-		initialize();
+	    map = new Map(1);
+	    registerTiles();        // 1. Las baldosas toman los índices bajos (0, 1, 2...)
+	    this.cCheker = cCheker; // 2. Asignas el checker antes de crear los enemigos
+	    initialize();           // 3. Creas los enemigos al final
 	}
 
 
 	@Override
-	public void initialize() {
-		List<Point> movementEnemy1 = new LinkedList<>();
-		addPointToListMovement(8, 9, movementEnemy1);
-		addPointToListMovement(8, 25, movementEnemy1);
-		putEnemy(movementEnemy1);
-		List<Point> movementEnemy2 = new LinkedList<>();
-		addPointToListMovement(9, 25, movementEnemy2);
-		addPointToListMovement(9, 9, movementEnemy2);
-		putEnemy(movementEnemy2);
-		List<Point> movementEnemy3 = new LinkedList<>();
-		addPointToListMovement(10, 9, movementEnemy3);
-		addPointToListMovement(10, 25, movementEnemy3);
-		putEnemy(movementEnemy3);
-		List<Point> movementEnemy4 = new LinkedList<>();
-		addPointToListMovement(11, 25, movementEnemy4);
-		addPointToListMovement(11, 9, movementEnemy4);
-		putEnemy(movementEnemy4);
+	public void initialize() { // Ayudado a poner por Gemini IA 2026, supervisado 
+	    // Enemigo 1: Fila 8, empieza a la izquierda (col 9) y va a la derecha (col 25)
+	    List<Point> movementEnemy1 = new LinkedList<>();
+	    addPointToListMovement(8, 7, movementEnemy1);  // Inicio (Izquierda)
+	    addPointToListMovement(8, 24, movementEnemy1); // Destino (Derecha)
+	    putEnemy(movementEnemy1);
+
+	    // Enemigo 2: Fila 9, empieza a la derecha (col 25) y va a la izquierda (col 9)
+	    List<Point> movementEnemy2 = new LinkedList<>();
+	    addPointToListMovement(9, 24, movementEnemy2); // Inicio (Derecha)
+	    addPointToListMovement(9, 7, movementEnemy2);  // Destino (Izquierda)
+	    putEnemy(movementEnemy2);
+
+	    // Enemigo 3: Fila 10, empieza a la izquierda (col 9) y va a la derecha (col 25)
+	    List<Point> movementEnemy3 = new LinkedList<>();
+	    addPointToListMovement(10, 7, movementEnemy3);  // Inicio (Izquierda)
+	    addPointToListMovement(10, 24, movementEnemy3); // Destino (Derecha)
+	    putEnemy(movementEnemy3);
+
+	    // Enemigo 4: Fila 11, empieza a la derecha (col 25) y va a la izquierda (col 9)
+	    List<Point> movementEnemy4 = new LinkedList<>();
+	    addPointToListMovement(11, 24, movementEnemy4); // Inicio (Derecha)
+	    addPointToListMovement(11, 7, movementEnemy4);  // Destino (Izquierda)
+	    putEnemy(movementEnemy4);
 	}
 	
 	private void addPointToListMovement(int row, int col, List<Point> movement) {
-		int desface = DimensionGame.TILESIZE/2;
-		movement.add(new Point(6*DimensionGame.TILESIZEWIDTH, 9*DimensionGame.TILESIZEHEIGHT-desface));
-		
+	    movement.add(new Point(col * DimensionGame.TILESIZEWIDTH, row * DimensionGame.TILESIZEHEIGHT ));
 	}
 	
 	private void putEnemy(List<Point> movement) {
-		elements.put(elements.size(), new Basic(movement, cCheker, this));
+	    // Al sumarle 1000, los enemigos se guardan lejos de los índices de las baldosas
+	    // Esto hace que se dibujen SIEMPRE por encima del suelo y no queden invisibles
+	    int unIdAlto = elements.size() + 1000;
+	    elements.put(unIdAlto, new Basic(movement, cCheker, this));
 	}
 
 	@Override

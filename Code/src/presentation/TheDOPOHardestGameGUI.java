@@ -115,7 +115,6 @@ public class TheDOPOHardestGameGUI extends JPanel implements Runnable {
 				try {
 					update();
 				} catch (HardestGameException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				// 2. DRAW:
@@ -180,11 +179,11 @@ public class TheDOPOHardestGameGUI extends JPanel implements Runnable {
             if (img != null) {
                 g2.drawImage(img, e.getPosX(), e.getPosY(),
                     (int)(e.getWidth()),
-                    (int)(e.getHeight()), null);
+                    (int)(e.getHeight()), 
+                    null);
             }
-        }        
+        }
     }
-	
 	
 	/**
 	 * Paint components at the graphic
