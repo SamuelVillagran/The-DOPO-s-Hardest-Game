@@ -3,9 +3,10 @@ package domain;
 import java.awt.Point;
 import java.util.List;
 
-public class Enemy extends Entity implements Solid {
+public abstract class Enemy extends Entity implements Solid {
 
 	protected List<Point> movement;
+	protected char direction;
 	
 	public Enemy() {
 		posX = 210;
@@ -34,16 +35,18 @@ public class Enemy extends Entity implements Solid {
 	 */
 	public void move(char direction) {
 		switch (direction) {
-			case 'u': posY -= speed;
+			case 'u': posY -= speed; direction = 'u';
 				break;
-			case 'd': posY += speed;
+			case 'd': posY += speed; direction = 'd';
 				break;
-			case 'l': posX -= speed;
+			case 'l': posX -= speed; direction = 'l';
 				break;
-			case 'r': posX += speed;
+			case 'r': posX += speed; direction = 'r';
 				break;
 		}
 	}
+	
+	public abstract void move();
 
 	@Override
 	public String getPathImage() {

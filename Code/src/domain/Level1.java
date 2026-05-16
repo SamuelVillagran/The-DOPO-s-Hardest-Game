@@ -13,27 +13,44 @@ public class Level1 extends Level {
 		registerTiles();
 		initialize();
 	}
+	
+	public Level1(CollisionChecker cCheker) {
+		numCoin = 3;
+		map = new Map(1);
+		registerTiles();
+		this.cCheker = cCheker;
+		initialize();
+	}
+
 
 	@Override
 	public void initialize() {
-		int desface = DimensionGame.TILESIZE/2;
 		List<Point> movementEnemy1 = new LinkedList<>();
-		movementEnemy1.add(new Point(6*DimensionGame.TILESIZEWIDTH, 9*DimensionGame.TILESIZEHEIGHT-desface));
-		movementEnemy1.add(new Point(25*DimensionGame.TILESIZEWIDTH-desface, 9*DimensionGame.TILESIZEHEIGHT-desface));
-		elements.put(elements.size(), new Basic(movementEnemy1));
+		addPointToListMovement(8, 9, movementEnemy1);
+		addPointToListMovement(8, 25, movementEnemy1);
+		putEnemy(movementEnemy1);
 		List<Point> movementEnemy2 = new LinkedList<>();
-		movementEnemy2.add(new Point(25*DimensionGame.TILESIZEWIDTH-desface, 10*DimensionGame.TILESIZEHEIGHT-desface));
-		movementEnemy2.add(new Point(6*DimensionGame.TILESIZEWIDTH, 10*DimensionGame.TILESIZEHEIGHT-desface));
-		elements.put(elements.size(), new Basic(movementEnemy2));
+		addPointToListMovement(9, 25, movementEnemy2);
+		addPointToListMovement(9, 9, movementEnemy2);
+		putEnemy(movementEnemy2);
 		List<Point> movementEnemy3 = new LinkedList<>();
-		movementEnemy3.add(new Point(6*DimensionGame.TILESIZEWIDTH, 11*DimensionGame.TILESIZEHEIGHT-desface));
-		movementEnemy3.add(new Point(25*DimensionGame.TILESIZEWIDTH-desface, 11*DimensionGame.TILESIZEHEIGHT));
-		elements.put(elements.size(), new Basic(movementEnemy3));
+		addPointToListMovement(10, 9, movementEnemy3);
+		addPointToListMovement(10, 25, movementEnemy3);
+		putEnemy(movementEnemy3);
 		List<Point> movementEnemy4 = new LinkedList<>();
-		movementEnemy4.add(new Point(25*DimensionGame.TILESIZEWIDTH-desface, 12*DimensionGame.TILESIZEHEIGHT-desface));
-		movementEnemy4.add(new Point(6*DimensionGame.TILESIZEWIDTH-desface, 12*DimensionGame.TILESIZEHEIGHT));
-		elements.put(elements.size(), new Basic(movementEnemy4));
+		addPointToListMovement(11, 25, movementEnemy4);
+		addPointToListMovement(11, 9, movementEnemy4);
+		putEnemy(movementEnemy4);
+	}
+	
+	private void addPointToListMovement(int row, int col, List<Point> movement) {
+		int desface = DimensionGame.TILESIZE/2;
+		movement.add(new Point(6*DimensionGame.TILESIZEWIDTH, 9*DimensionGame.TILESIZEHEIGHT-desface));
 		
+	}
+	
+	private void putEnemy(List<Point> movement) {
+		elements.put(elements.size(), new Basic(movement, cCheker, this));
 	}
 
 	@Override

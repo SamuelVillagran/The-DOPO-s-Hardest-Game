@@ -19,6 +19,7 @@ import javax.swing.JPanel;
 
 import domain.DimensionGame;
 import domain.Element;
+import domain.Enemy;
 import domain.GameMode;
 import domain.HardestGameException;
 import domain.TheDOPOHardestGame;
@@ -150,6 +151,11 @@ public class TheDOPOHardestGameGUI extends JPanel implements Runnable {
 		if (keyH.getRigth() == true) {
 			TheDOPOHardestGame.getGame().movePlayers('r');	
 		}
+		
+		for (Enemy e : TheDOPOHardestGame.getGame().getEnemies()) {
+			e.move();
+		}
+	
 	}
 
 	/**
