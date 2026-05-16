@@ -22,6 +22,7 @@ public abstract class Player extends Entity implements HitBox, Movable{
 		//((PlayerState) state).setPlayer(this);
 		baseSpeed = 3;
 		size = 0.5f;
+		lifes = 1;
 	} 
 	
 	private PlayerState createInitialState(PlayerType type) throws HardestGameException {
@@ -42,80 +43,7 @@ public abstract class Player extends Entity implements HitBox, Movable{
 		size = 0.5f;
 	}
 	
-	/**
-	 * This method decrement player's Y position.
-	 * Decrement the magnitude of parameter given.
-	 * @param decrement decrement is the units of player's
-	 * Y Position that going to decrement
-	 */
-	public void decrementPosY(int decrement) {
-		posY -= decrement;
-	}
-	
-	/**
-	 * This method decrement player's X position.
-	 * Decrement the magnitude of parameter given.
-	 * @param decrement decrement is the units of player's
-	 * X Position that going to decrement
-	 */
-	public void decrementPosX(int decrement) {
-		posX -= decrement;
-	}
-	
-	/**
-	 * This method increment player's Y position.
-	 * Increment the magnitude of parameter given.
-	 * @param increment increment is the units of player's
-	 * Y Position that going to increment
-	 */
-	public void incrementPosY(int increment) {
-		posY += increment;
-	}
-	
-	/**
-	 * This method increment player's X position.
-	 * Increment the magnitude of parameter given.
-	 * @param decrement increment is the units of player's
-	 * X Position that going to increment
-	 */
-	public void incrementPosX(int increment) {
-		posX += increment;
-	}
-	
-	/**
-	 * This method decrement player's Y position.
-	 * This method decrement player's X position.
-	 * Decrement the magnitude of player speed.
-	 */
-	public void decrementSpeedPosY() {
-		posY -= speed;
-	}
-	
-	/**
-	 * This method decrement player's X position.
-	 * Decrement the magnitude of player speed.
-	 */
-	public void decrementSpeedPosX() {
-		posX -= speed;
-	}
-	
-	/**
-	 * This method increment player's Y position.
-	 * Increment the magnitude of player speed
-	 */
-	public void incrementSpeedPosY() {
-		posY += speed;
-	}
-	
-	/**
-	 * This method increment player's X position.
-	 * Increment the magnitude of player speed.
-	 */
-	public void incrementSpeedPosX() {
-		posX += speed;
-	}
-	
-	public int getSpeed() {
+	public float getSpeed() {
 		return speed;
 	}
 
@@ -138,7 +66,7 @@ public abstract class Player extends Entity implements HitBox, Movable{
 	 * @param direction direction is where going to move the player
 	 */
 	public void move(char direction) {
-		int speed = getPlayerState().getSpeed();
+		float speed = getPlayerState().getSpeed();
 		switch (direction) {
 			case 'u': posY -= speed;
 				break;
@@ -152,7 +80,7 @@ public abstract class Player extends Entity implements HitBox, Movable{
 	}
 	
 	public void move(char direction, CollisionContext context, CollisionChecker checker) {
-		int speed = getPlayerState().getSpeed();;
+		float speed = getPlayerState().getSpeed();;
 		
 		int nextX = posX;
 		int nextY = posY;
@@ -210,7 +138,7 @@ public abstract class Player extends Entity implements HitBox, Movable{
 		getPlayerState().onEnemyContact();
 	}
 
-	public void addCoin(Coin coin) {
+	public void addCoin() {
 		countCoins ++;
 	}
 
@@ -220,6 +148,14 @@ public abstract class Player extends Entity implements HitBox, Movable{
 
 	public void addLife() {
 		lifes++;
+	}
+
+	public int getLifes() {
+		return lifes;
+	}
+	
+	public void substractLife() {
+		lifes --;
 	}
 
 }

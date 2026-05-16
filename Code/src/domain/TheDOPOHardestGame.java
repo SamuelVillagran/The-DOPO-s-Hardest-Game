@@ -66,21 +66,8 @@ public class TheDOPOHardestGame {
 	public HashMap<String, String> getElementsToDraw() throws IOException{
 		HashMap<String, String> elementsPath = new HashMap();
 		elementsPath = currentLevel.getElementsToDraw();
-		
-		//Carga las imagenes de las casillas 
-//		Tile[] tiles = loadTiles();
-//	    for (Tile t : tiles) {
-//	        if (t != null && !elementsPath.containsKey(t.getNameClass())) {
-//	            elementsPath.put(t.getNameClass(), t.getPathImage());
-//	        }
-//	    }
-//		
-//	    // Carga la imagen del jugador
-//		Player py = getPlayer1();
-//		elementsPath.put(py.getNameClass(), py.getPathImage());
 		return elementsPath;
 	}
-
 
 	public Player getPlayer1() {
 		return players.get(0);
@@ -124,13 +111,20 @@ public class TheDOPOHardestGame {
 		}
 	}
 	
-	
 	public void setCurrentLevel(int numLevel) {
 		numCurrentLevel = numLevel;
 	}
 	
 	public List<Enemy> getEnemies() {
 		return currentLevel.getEnemies();
+	}
+	
+	public void update() {
+		for (Enemy e : getEnemies()) {
+			e.move();
+		}
+		
+		currentLevel.update(cChecker);
 	}
 	
 }

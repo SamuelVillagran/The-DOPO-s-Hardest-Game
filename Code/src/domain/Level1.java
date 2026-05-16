@@ -6,6 +6,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Level1 extends Level {
+	private CollisionChecker cCheker;
 
 	public Level1() {
 		numCoin = 3;
