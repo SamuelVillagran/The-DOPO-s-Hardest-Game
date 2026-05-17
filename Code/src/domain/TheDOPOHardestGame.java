@@ -39,7 +39,6 @@ public class TheDOPOHardestGame {
 		}
 		return game;
 	}
-
 	
 	/**
 	 * Start the game with a specific characteristics.
@@ -55,7 +54,7 @@ public class TheDOPOHardestGame {
 		this.currentLevel = new Level1(cChecker);
 		this.numCurrentLevel = numCurrentLevel;
 		currentLevel.spawnPlayers(players);
-		currentLevel.setPlayers(players);
+		//currentLevel.setPlayers(players);
 	}
 	
 	/**
